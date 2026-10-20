@@ -261,6 +261,14 @@ const getItemTotalPrice = (item: SalesReportItem) => {
   return toNumber(item.quantity) * getItemUnitPrice(item);
 };
 
+const getItemBrand = (item: SalesReportItem) => {
+  return String(item.brand || item.brandName || '').trim();
+};
+
+const getItemCategory = (item: SalesReportItem) => {
+  return String(item.category || item.categoryName || '').trim();
+};
+
 // نرمال‌سازی API_URL: اگر با /api تمام شده بود، آن را حذف می‌کنیم
 const RAW_API_URL =
   typeof window !== 'undefined'
@@ -610,7 +618,8 @@ const SalesReportsAdminTable = ({
       <tr>
         <td style="text-align:center;">${i + 1}</td>
         <td>${item.productName || '—'}</td>
-        <td>${item.brand || '—'}</td>
+        <td style="text-align:center;">${item.brand || '—'}</td>
+        <td style="text-align:center;">${item.category || item.categoryName || '—'}</td>
         <td style="text-align:center;">${formatFaNumber(item.unitPrice)} تومان</td>
         <td style="text-align:center;">${formatFaNumber(item.quantity) || '—'}</td>
         <td style="text-align:center;">${formatFaNumber(item.totalPrice ?? (Number(item.quantity || 0) * Number(item.unitPrice || 0)))} تومان</td>
@@ -695,8 +704,9 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
   <thead>
     <tr>
       <th style="width: 5%;">ردیف</th>
-      <th style="width: 35%;">عنوان</th>
-      <th style="width: 15%;">برند</th>
+      <th style="width: 25%;">عنوان</th>
+      <th style="width: 12%;">برند</th>
+      <th style="width: 13%;">دسته‌بندی</th>
       <th style="width: 15%;">قیمت</th>
       <th style="width: 10%;">تعداد</th>
       <th style="width: 20%;">مجموع</th>
@@ -767,6 +777,8 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
         <tr>
           <td style="text-align:center;">${index + 1}</td>
           <td>${item.productName || '—'}</td>
+          <td style="text-align:center;">${item.brand || '—'}</td>
+          <td style="text-align:center;">${item.category || item.categoryName || '—'}</td>
           <td style="text-align:center;">${formatFaNumber(item.unitPrice)} تومان</td>
           <td style="text-align:center;">${formatFaNumber(item.quantity) || '—'}</td>
           <td style="text-align:center;">${formatFaNumber(item.totalPrice ?? (Number(item.quantity || 0) * Number(item.unitPrice || 0)))} تومان</td>
@@ -784,10 +796,12 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
             <thead>
               <tr>
                 <th style="width: 5%;">ردیف</th>
-                <th style="width: 50%;">عنوان</th>
-                <th style="width: 15%;">قیمت</th>
-                <th style="width: 15%;">تعداد</th>
-                <th style="width: 15%;">مجموع</th>
+                <th style="width: 30%;">عنوان</th>
+                <th style="width: 15%;">برند</th>
+                <th style="width: 15%;">دسته‌بندی</th>
+                <th style="width: 12%;">قیمت</th>
+                <th style="width: 10%;">تعداد</th>
+                <th style="width: 13%;">مجموع</th>
               </tr>
             </thead>
             <tbody>
@@ -795,7 +809,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="3" style="text-align:left;"><strong>جمع کل:</strong></td>
+                <td colspan="5" style="text-align:left;"><strong>جمع کل:</strong></td>
                 <td colspan="2" style="text-align:center;"><strong>${formatToman(report.totalAmount)} تومان</strong></td>
               </tr>
             </tfoot>
@@ -1782,11 +1796,19 @@ ${rowsHtml}
                             </th>
 
                             <th className="px-5 py-4 font-black">
-                              تعداد
+                              برند
+                            </th>
+
+                            <th className="px-5 py-4 font-black">
+                              دسته‌بندی
                             </th>
 
                             <th className="px-5 py-4 font-black">
                               قیمت
+                            </th>
+
+                            <th className="px-5 py-4 font-black">
+                              تعداد
                             </th>
 
                             <th className="px-5 py-4 font-black">
@@ -1809,12 +1831,20 @@ ${rowsHtml}
                                 {getProductName(item)}
                               </td>
 
-                              <td className="px-5 py-4 font-black text-amber-700 dark:text-amber-300">
-                                {formatFaNumber(item.quantity)} قلم
+                              <td className="px-5 py-4 text-gray-600 dark:text-gray-300">
+                                {getItemBrand(item) || '—'}
+                              </td>
+
+                              <td className="px-5 py-4 text-gray-600 dark:text-gray-300">
+                                {getItemCategory(item) || '—'}
                               </td>
 
                               <td className="px-5 py-4 text-gray-600 dark:text-gray-300">
                                 {formatToman(getItemUnitPrice(item))}
+                              </td>
+
+                              <td className="px-5 py-4 font-black text-amber-700 dark:text-amber-300">
+                                {formatFaNumber(item.quantity)} قلم
                               </td>
 
                               <td className="px-5 py-4 font-black text-emerald-700 dark:text-emerald-300">

@@ -225,6 +225,8 @@ export interface SalesReportItem {
   title?: string;
   brand?: string;
   brandName?: string;
+  category?: string;
+  categoryName?: string;
   quantity?: number;
   count?: number;
   price?: number;

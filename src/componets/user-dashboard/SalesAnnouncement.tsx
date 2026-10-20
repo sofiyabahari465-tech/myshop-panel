@@ -36,6 +36,10 @@ type WarehouseSaleProduct = {
 type SalesReportItem = {
   productId?: string;
   productName?: string;
+  brand?: string;
+  brandName?: string;
+  category?: string;
+  categoryName?: string;
   quantity?: number;
   unitPrice?: number;
   totalPrice?: number;
@@ -601,6 +605,9 @@ const SalesAnnouncement = ({
           confirmedSale: true,
           items: selectedSaleItems.map((item) => ({
             productId: item.productId,
+            productName: item.productName,
+            brand: item.brand,
+            category: item.category,
             quantity: item.saleQuantity,
           })),
         },

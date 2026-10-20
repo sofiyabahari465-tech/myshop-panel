@@ -5,6 +5,10 @@ import { usePrint } from '../../hooks/usePrint';
 type SaleItem = {
   productId?: string;
   productName?: string;
+  brand?: string;
+  brandName?: string;
+  category?: string;
+  categoryName?: string;
   quantity?: number | string;
   unitPrice?: number | string;
   totalPrice?: number | string;
@@ -1016,6 +1020,8 @@ const PrintContent = ({
           <tr>
             <th>ردیف</th>
             <th>عنوان</th>
+            <th>برند</th>
+            <th>دسته‌بندی</th>
             <th>قیمت</th>
             <th>تعداد</th>
             <th>مبلغ کل</th>
@@ -1026,7 +1032,7 @@ const PrintContent = ({
         <tbody>
           {items.length === 0 ? (
             <tr>
-              <td colSpan={5}>
+              <td colSpan={7}>
                 کالایی در این گزارش وجود ندارد.
               </td>
             </tr>
@@ -1044,6 +1050,16 @@ const PrintContent = ({
                 <td>
                   {item.productName ||
                     'کالای بدون نام'}
+                </td>
+
+
+                <td>
+                  {item.brand || item.brandName || '—'}
+                </td>
+
+
+                <td>
+                  {item.category || item.categoryName || '—'}
                 </td>
 
 
