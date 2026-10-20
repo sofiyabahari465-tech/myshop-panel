@@ -1044,7 +1044,7 @@ tr:nth-child(even) td { background: #f9fafb; }
 </div>
 
 <div class="report-title">
-  <h2>📋 گزارش لیست نمایندگان</h2>
+  <h2>گزارش لیست نمایندگان</h2>
   <p>لیست کامل نمایندگان ثبت‌شده در سامانه</p>
 </div>
 

@@ -649,7 +649,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 .summary-card .label { font-size: 11px; color: #666; }
 .summary-card .value { font-size: 20px; font-weight: bold; margin-top: 5px; }
 .footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
-@media print { @page { size: A4 portrait; margin: 10mm; } body { padding: 0; } }
+@media print { @page { size: A4 portrait; margin: 10mm; } body { padding: 0; } .print-summary-section { break-inside: avoid; page-break-inside: avoid; } }
 </style>
 </head>
 <body>
@@ -668,7 +668,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 </div>
 
 <div class="report-title">
-  <h2>📋 گزارش اعلام فروش</h2>
+  <h2>گزارش اعلام فروش</h2>
   <p>گزارش تک‌گزارش فروش نمایندگی ${report.representativeName || ''}</p>
 </div>
 
@@ -705,30 +705,35 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
   <tbody>
     ${itemsHtml}
   </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="3" style="text-align:left;"><strong>جمع کل:</strong></td>
-      <td style="text-align:center;"><strong>${formatFaNumber(report.totalItems ?? items.length)}</strong></td>
-      <td></td>
-      <td style="text-align:center;"><strong>${formatToman(report.totalAmount)}</strong></td>
-    </tr>
-  </tfoot>
 </table>
 
-<div class="summary">
-  <div class="summary-card">
-    <div class="label">تعداد اقلام</div>
-    <div class="value">${formatFaNumber(report.totalItems ?? items.length)}</div>
-  </div>
-  <div class="summary-card">
-    <div class="label">مجموع فروش</div>
-    <div class="value">${formatFaNumber(report.totalAmount)}<br><span style="font-size:12px;">تومان</span></div>
-  </div>
-</div>
+<div class="print-summary-section">
+  <table style="margin-top: 15px;">
+    <tbody>
+      <tr style="background: #ecfdf5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact;">
+        <td colspan="3" style="text-align:left;"><strong>جمع کل:</strong></td>
+        <td style="text-align:center;"><strong>${formatFaNumber(report.totalItems ?? items.length)}</strong></td>
+        <td></td>
+        <td style="text-align:center;"><strong>${formatToman(report.totalAmount)}</strong></td>
+      </tr>
+    </tbody>
+  </table>
 
-<div class="footer">
-  <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
-  <p>بازرگانی مهر امین - 1405</p>
+  <div class="summary">
+    <div class="summary-card">
+      <div class="label">تعداد اقلام</div>
+      <div class="value">${formatFaNumber(report.totalItems ?? items.length)}</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">مجموع فروش</div>
+      <div class="value">${formatFaNumber(report.totalAmount)}<br><span style="font-size:12px;">تومان</span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
+    <p>بازرگانی مهر امین - 1405</p>
+  </div>
 </div>
 
 </body>
@@ -834,7 +839,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 .summary-card .label { font-size: 11px; color: #666; }
 .summary-card .value { font-size: 20px; font-weight: bold; margin-top: 5px; }
 .footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
-@media print { @page { size: A4 portrait; margin: 10mm; } body { padding: 0; } }
+@media print { @page { size: A4 portrait; margin: 10mm; } body { padding: 0; } .print-summary-section { break-inside: avoid; page-break-inside: avoid; } }
 </style>
 </head>
 <body>
@@ -854,7 +859,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 </div>
 
 <div class="report-title">
-  <h2>📋 گزارش جامع اعلام فروش نمایندگان</h2>
+  <h2>گزارش جامع اعلام فروش نمایندگان</h2>
   <p>گزارش کامل اعلام فروش‌های ثبت‌شده توسط نمایندگان</p>
 </div>
 
