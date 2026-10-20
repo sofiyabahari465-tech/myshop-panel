@@ -284,13 +284,13 @@ const Warehouse: React.FC<WarehouseProps> = ({
       .map((rep, idx) => {
         return `
         <tr>
-          <td style="text-align:center;">\${idx + 1}</td>
-          <td>\${escapeHtml(rep.name)}<div style="font-size:10px;color:#6b7280;margin-top:2px;" dir="ltr">\${escapeHtml(rep.phone)}</div></td>
-          <td style="text-align:center;">\${escapeHtml(rep.code)}</td>
-          <td style="text-align:center;">\${escapeHtml(rep.city)}</td>
-          <td style="text-align:center;">\${rep.status}</td>
-          <td style="text-align:center;">\${rep.hasError ? 'نامشخص' : formatFa(rep.itemCount)}</td>
-          <td style="text-align:center;">\${rep.hasError ? 'نامشخص' : formatFa(rep.totalValue) + ' تومان'}</td>
+          <td style="text-align:center;">${idx + 1}</td>
+          <td>${escapeHtml(rep.name)}<div style="font-size:10px;color:#6b7280;margin-top:2px;" dir="ltr">${escapeHtml(rep.phone)}</div></td>
+          <td style="text-align:center;">${escapeHtml(rep.code)}</td>
+          <td style="text-align:center;">${escapeHtml(rep.city)}</td>
+          <td style="text-align:center;">${rep.status}</td>
+          <td style="text-align:center;">${rep.hasError ? 'نامشخص' : formatFa(rep.itemCount)}</td>
+          <td style="text-align:center;">${rep.hasError ? 'نامشخص' : formatFa(rep.totalValue) + ' تومان'}</td>
         </tr>`;
       })
       .join('');
@@ -348,7 +348,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 <body>
 <div class="header">
   <div class="logo">
-    <img src="\${logoUrl}" alt="لوگو" onerror="this.style.display='none'" />
+    <img src="${logoUrl}" alt="لوگو" onerror="this.style.display='none'" />
     <div class="company-info">
       <h1>بازرگانی مهر امین</h1>
       <p>سامانه مدیریت نمایندگی و انبار</p>
@@ -356,8 +356,8 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
     </div>
   </div>
   <div style="font-size: 12px; text-align: left;">
-    <p><strong>تاریخ چاپ:</strong> \${today}</p>
-    <p><strong>تعداد نمایندگان:</strong> \${formatFa(repsWithSummary.length)}</p>
+    <p><strong>تاریخ چاپ:</strong> ${today}</p>
+    <p><strong>تعداد نمایندگان:</strong> ${formatFa(repsWithSummary.length)}</p>
   </div>
 </div>
 
@@ -369,19 +369,19 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 <div class="info-grid">
   <div class="info-card">
     <div class="label">نمایندگان فعال</div>
-    <div class="value">\${formatFa(activeCount)}</div>
+    <div class="value">${formatFa(activeCount)}</div>
   </div>
   <div class="info-card">
     <div class="label">مجموع کالاهای دارای موجودی</div>
-    <div class="value">\${formatFa(totalItems)}</div>
+    <div class="value">${formatFa(totalItems)}</div>
   </div>
   <div class="info-card">
     <div class="label">ارزش کل انبارها</div>
-    <div class="value">\${formatFa(totalValue)}<br><span style="font-size:11px;">تومان</span></div>
+    <div class="value">${formatFa(totalValue)}<br><span style="font-size:11px;">تومان</span></div>
   </div>
   <div class="info-card">
     <div class="label">انبارهای ناموفق</div>
-    <div class="value" style="color:\${failedCount > 0 ? '#b91c1c' : '#111'};">\${formatFa(failedCount)}</div>
+    <div class="value" style="color:${failedCount > 0 ? '#b91c1c' : '#111'};">${formatFa(failedCount)}</div>
   </div>
 </div>
 
@@ -398,13 +398,13 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
     </tr>
   </thead>
   <tbody>
-    \${rows}
+    ${rows}
   </tbody>
   <tfoot>
     <tr>
       <td colspan="5" style="text-align:left;"><strong>جمع کل:</strong></td>
-      <td style="text-align:center;"><strong>\${formatFa(totalItems)}</strong></td>
-      <td style="text-align:center;"><strong>\${formatFa(totalValue)} تومان</strong></td>
+      <td style="text-align:center;"><strong>${formatFa(totalItems)}</strong></td>
+      <td style="text-align:center;"><strong>${formatFa(totalValue)} تومان</strong></td>
     </tr>
   </tfoot>
 </table>
@@ -412,15 +412,15 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 <div class="summary">
   <div class="summary-card">
     <div class="label">تعداد کل انبارها</div>
-    <div class="value">\${formatFa(repsWithSummary.length)}</div>
+    <div class="value">${formatFa(repsWithSummary.length)}</div>
   </div>
   <div class="summary-card">
     <div class="label">مجموع کالاها</div>
-    <div class="value">\${formatFa(totalItems)}</div>
+    <div class="value">${formatFa(totalItems)}</div>
   </div>
   <div class="summary-card">
     <div class="label">ارزش کل انبارها</div>
-    <div class="value">\${formatFa(totalValue)}<br><span style="font-size:11px;">تومان</span></div>
+    <div class="value">${formatFa(totalValue)}<br><span style="font-size:11px;">تومان</span></div>
   </div>
 </div>
 
@@ -505,7 +505,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
             ? error.message
             : 'دریافت انبار ناموفق بود.';
         window.alert(
-          `دریافت جزئیات انبار \${representative.name || ''} ناموفق بود:\n\${message}`,
+          `دریافت جزئیات انبار ${representative.name || ''} ناموفق بود:\n${message}`,
         );
         return;
       }
@@ -544,13 +544,13 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
         const total = qty * unit;
         return `
         <tr>
-          <td style="text-align:center;">\${idx + 1}</td>
-          <td>\${escapeHtml(name)}</td>
-          <td style="text-align:center;">\${escapeHtml(brand)}</td>
-          <td style="text-align:center;">\${escapeHtml(category)}</td>
-          <td style="text-align:center;">\${formatFa(qty)}</td>
-          <td style="text-align:center;">\${formatFa(unit)} تومان</td>
-          <td style="text-align:center;">\${formatFa(total)} تومان</td>
+          <td style="text-align:center;">${idx + 1}</td>
+          <td>${escapeHtml(name)}</td>
+          <td style="text-align:center;">${escapeHtml(brand)}</td>
+          <td style="text-align:center;">${escapeHtml(category)}</td>
+          <td style="text-align:center;">${formatFa(qty)}</td>
+          <td style="text-align:center;">${formatFa(unit)} تومان</td>
+          <td style="text-align:center;">${formatFa(total)} تومان</td>
         </tr>`;
       })
       .join('');
@@ -575,7 +575,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>چاپ انبار \${escapeHtml(representative.name || '')}</title>
+<title>چاپ انبار ${escapeHtml(representative.name || '')}</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
@@ -608,7 +608,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 <body>
 <div class="header">
   <div class="logo">
-    <img src="\${logoUrl}" alt="لوگو" onerror="this.style.display='none'" />
+    <img src="${logoUrl}" alt="لوگو" onerror="this.style.display='none'" />
     <div class="company-info">
       <h1>بازرگانی مهر امین</h1>
       <p>سامانه مدیریت نمایندگی و انبار</p>
@@ -616,39 +616,39 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
     </div>
   </div>
   <div style="font-size: 12px; text-align: left;">
-    <p><strong>تاریخ چاپ:</strong> \${today}</p>
+    <p><strong>تاریخ چاپ:</strong> ${today}</p>
   </div>
 </div>
 
 <div class="report-title">
   <h2>📋 گزارش انبار نمایندگی</h2>
-  <p>فهرست کامل کالاهای دارای موجودی \${escapeHtml(representative.name || '')}</p>
+  <p>فهرست کامل کالاهای دارای موجودی ${escapeHtml(representative.name || '')}</p>
 </div>
 
 <div class="info-grid">
   <div class="info-card">
     <div class="label">نام نمایندگی</div>
-    <div class="value">\${escapeHtml(representative.name || '—')}</div>
+    <div class="value">${escapeHtml(representative.name || '—')}</div>
   </div>
   <div class="info-card">
     <div class="label">کد نمایندگی</div>
-    <div class="value">\${escapeHtml(representative.code || '—')}</div>
+    <div class="value">${escapeHtml(representative.code || '—')}</div>
   </div>
   <div class="info-card">
     <div class="label">شهر</div>
-    <div class="value">\${escapeHtml(representative.city || '—')}</div>
+    <div class="value">${escapeHtml(representative.city || '—')}</div>
   </div>
   <div class="info-card">
     <div class="label">شماره تماس</div>
-    <div class="value" dir="ltr">\${escapeHtml(representative.phone || '—')}</div>
+    <div class="value" dir="ltr">${escapeHtml(representative.phone || '—')}</div>
   </div>
   <div class="info-card">
     <div class="label">تعداد ردیف‌های دارای موجودی</div>
-    <div class="value">\${formatFa(summary?.itemCount ?? items.length)}</div>
+    <div class="value">${formatFa(summary?.itemCount ?? items.length)}</div>
   </div>
   <div class="info-card">
     <div class="label">آخرین بروزرسانی</div>
-    <div class="value">\${updatedAtText}</div>
+    <div class="value">${updatedAtText}</div>
   </div>
 </div>
 
@@ -665,14 +665,14 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
     </tr>
   </thead>
   <tbody>
-    \${itemsHtml || '<tr><td colspan="7" style="text-align:center;color:#9ca3af;padding:30px;">هیچ کالای دارای موجودی ثبت نشده است.</td></tr>'}
+    ${itemsHtml || '<tr><td colspan="7" style="text-align:center;color:#9ca3af;padding:30px;">هیچ کالای دارای موجودی ثبت نشده است.</td></tr>'}
   </tbody>
   <tfoot>
     <tr>
       <td colspan="4" style="text-align:left;"><strong>جمع کل:</strong></td>
-      <td style="text-align:center;"><strong>\${formatFa(totalQty)}</strong></td>
+      <td style="text-align:center;"><strong>${formatFa(totalQty)}</strong></td>
       <td></td>
-      <td style="text-align:center;"><strong>\${formatFa(totalValue)} تومان</strong></td>
+      <td style="text-align:center;"><strong>${formatFa(totalValue)} تومان</strong></td>
     </tr>
   </tfoot>
 </table>
@@ -680,15 +680,15 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 <div class="summary">
   <div class="summary-card">
     <div class="label">تعداد انواع کالا</div>
-    <div class="value">\${formatFa(summary?.itemCount ?? items.length)}</div>
+    <div class="value">${formatFa(summary?.itemCount ?? items.length)}</div>
   </div>
   <div class="summary-card">
     <div class="label">مجموع قطعات</div>
-    <div class="value">\${formatFa(totalQty)}</div>
+    <div class="value">${formatFa(totalQty)}</div>
   </div>
   <div class="summary-card">
     <div class="label">ارزش کل انبار</div>
-    <div class="value">\${formatFa(totalValue)}<br><span style="font-size:12px;">تومان</span></div>
+    <div class="value">${formatFa(totalValue)}<br><span style="font-size:12px;">تومان</span></div>
   </div>
 </div>
 
