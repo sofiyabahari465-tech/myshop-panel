@@ -231,7 +231,7 @@ const Warehouse: React.FC<WarehouseProps> = ({
   };
 
   const formatTomanInline = (value: number): string => {
-    return `\${formatNumber(value)} تومان`;
+    return `${formatNumber(value)} تومان`;
   };
 
   // ===== چاپ کلی: چاپ جدول خلاصهٔ همهٔ انبارها =====
@@ -455,11 +455,11 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
           Accept: 'application/json',
         };
         if (token) {
-          headers.Authorization = `Bearer \${token}`;
+          headers.Authorization = `Bearer ${token}`;
         }
 
         const response = await fetch(
-          `\${apiBase}/representatives/\${encodeURIComponent(id)}/warehouse?_=\${Date.now()}`,
+          `${apiBase}/representatives/${encodeURIComponent(id)}/warehouse?_=${Date.now()}`,
           {
             method: 'GET',
             credentials: 'include',
