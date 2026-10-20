@@ -1223,8 +1223,8 @@ const InventoryPrint = ({
                 <th style={{ width: '25%' }}>عنوان</th>
                 <th style={{ width: '15%' }}>برند</th>
                 <th style={{ width: '15%' }}>دسته‌بندی</th>
-                <th style={{ width: '10%' }}>تعداد</th>
                 <th style={{ width: '15%' }}>قیمت</th>
+                <th style={{ width: '10%' }}>تعداد</th>
                 <th style={{ width: '15%' }}>مجموع</th>
               </tr>
             </thead>
@@ -1279,14 +1279,14 @@ const InventoryPrint = ({
 
 
 
-                    <td className="center">
-                      {formatNumber(item.quantity)} قلم
+                    <td className="money">
+                      {formatNumber(item.unitPrice)} تومان
                     </td>
 
 
 
-                    <td className="money">
-                      {formatNumber(item.unitPrice)} تومان
+                    <td className="center">
+                      {formatNumber(item.quantity)} قلم
                     </td>
 
 

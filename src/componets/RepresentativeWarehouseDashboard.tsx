@@ -1601,10 +1601,10 @@ const RepresentativeWarehouseDashboard: React.FC<Props> = ({
                     <th className="w-[26%] p-2">عنوان</th>
                     <th className="w-[15%] p-2">برند</th>
                     <th className="w-[17%] p-2">دسته</th>
-                    <th className="w-[9%] p-2">تعداد</th>
                     <th className="w-[13%] p-2">
                       قیمت
                     </th>
+                    <th className="w-[9%] p-2">تعداد</th>
                     <th className="w-[12%] p-2">
                       وضعیت
                     </th>
@@ -1638,11 +1638,11 @@ const RepresentativeWarehouseDashboard: React.FC<Props> = ({
                       </td>
 
                       <td className="break-words p-2">
-                        {formatNumber(item.qty)}
+                        {formatNumber(item.price)}
                       </td>
 
                       <td className="break-words p-2">
-                        {formatNumber(item.price)}
+                        {formatNumber(item.qty)}
                       </td>
 
                       <td className="break-words p-2 font-bold">

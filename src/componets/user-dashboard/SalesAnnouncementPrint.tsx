@@ -1016,8 +1016,8 @@ const PrintContent = ({
           <tr>
             <th>ردیف</th>
             <th>عنوان</th>
-            <th>تعداد</th>
             <th>قیمت</th>
+            <th>تعداد</th>
             <th>مبلغ کل</th>
           </tr>
         </thead>
@@ -1048,12 +1048,12 @@ const PrintContent = ({
 
 
                 <td>
-                  {numberFa(item.quantity)} قلم
+                  {moneyFa(item.unitPrice)}
                 </td>
 
 
                 <td>
-                  {moneyFa(item.unitPrice)}
+                  {numberFa(item.quantity)} قلم
                 </td>
 
 

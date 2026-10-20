@@ -611,8 +611,8 @@ const SalesReportsAdminTable = ({
         <td style="text-align:center;">${i + 1}</td>
         <td>${item.productName || '—'}</td>
         <td>${item.brand || '—'}</td>
-        <td style="text-align:center;">${formatFaNumber(item.quantity) || '—'}</td>
         <td style="text-align:center;">${formatFaNumber(item.unitPrice)} تومان</td>
+        <td style="text-align:center;">${formatFaNumber(item.quantity) || '—'}</td>
         <td style="text-align:center;">${formatFaNumber(item.totalPrice ?? (Number(item.quantity || 0) * Number(item.unitPrice || 0)))} تومان</td>
       </tr>
     `).join('');
@@ -697,8 +697,8 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
       <th style="width: 5%;">ردیف</th>
       <th style="width: 35%;">عنوان</th>
       <th style="width: 15%;">برند</th>
-      <th style="width: 10%;">تعداد</th>
       <th style="width: 15%;">قیمت</th>
+      <th style="width: 10%;">تعداد</th>
       <th style="width: 20%;">مجموع</th>
     </tr>
   </thead>
@@ -767,8 +767,8 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
         <tr>
           <td style="text-align:center;">${index + 1}</td>
           <td>${item.productName || '—'}</td>
-          <td style="text-align:center;">${formatFaNumber(item.quantity) || '—'}</td>
           <td style="text-align:center;">${formatFaNumber(item.unitPrice)} تومان</td>
+          <td style="text-align:center;">${formatFaNumber(item.quantity) || '—'}</td>
           <td style="text-align:center;">${formatFaNumber(item.totalPrice ?? (Number(item.quantity || 0) * Number(item.unitPrice || 0)))} تومان</td>
         </tr>
       `).join('');
@@ -785,8 +785,8 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
               <tr>
                 <th style="width: 5%;">ردیف</th>
                 <th style="width: 50%;">عنوان</th>
-                <th style="width: 15%;">تعداد</th>
                 <th style="width: 15%;">قیمت</th>
+                <th style="width: 15%;">تعداد</th>
                 <th style="width: 15%;">مجموع</th>
               </tr>
             </thead>

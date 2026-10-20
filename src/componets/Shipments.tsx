@@ -1706,10 +1706,10 @@ const Shipments: React.FC = () => {
                         <th className="p-3">
                           دسته‌بندی
                         </th>
-                        <th className="p-3">تعداد</th>
                         <th className="p-3">
                           قیمت
                         </th>
+                        <th className="p-3">تعداد</th>
                         <th className="p-3">وضعیت</th>
                       </tr>
                     </thead>
@@ -1744,13 +1744,13 @@ const Shipments: React.FC = () => {
 
                           <td className="p-3">
                             {formatNumber(
-                              row.quantity,
+                              row.unitPrice,
                             )}
                           </td>
 
                           <td className="p-3">
                             {formatNumber(
-                              row.unitPrice,
+                              row.quantity,
                             )}
                           </td>
 
@@ -1981,10 +1981,10 @@ const Shipments: React.FC = () => {
                         <th className="p-3">
                           دسته‌بندی
                         </th>
-                        <th className="p-3">تعداد</th>
                         <th className="p-3">
                           قیمت
                         </th>
+                        <th className="p-3">تعداد</th>
                         <th className="p-3">
                           مبلغ
                         </th>
@@ -2014,15 +2014,15 @@ const Shipments: React.FC = () => {
 
                             <td className="p-3">
                               {formatNumber(
-                                item.quantity,
-                              )}
+                                item.unitPrice,
+                              )}{' '}
+                              تومان
                             </td>
 
                             <td className="p-3">
                               {formatNumber(
-                                item.unitPrice,
-                              )}{' '}
-                              تومان
+                                item.quantity,
+                              )}
                             </td>
 
                             <td className="p-3">

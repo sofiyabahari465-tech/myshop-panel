@@ -558,8 +558,8 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
           <td>${escapeHtml(name)}</td>
           <td style="text-align:center;">${escapeHtml(brand)}</td>
           <td style="text-align:center;">${escapeHtml(category)}</td>
-          <td style="text-align:center;">${formatFa(qty)}</td>
           <td style="text-align:center;">${formatFa(unit)} تومان</td>
+          <td style="text-align:center;">${formatFa(qty)}</td>
           <td style="text-align:center;">${formatFa(total)} تومان</td>
         </tr>`;
       })
@@ -669,8 +669,8 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
       <th style="width:34%;">عنوان</th>
       <th style="width:13%;">برند</th>
       <th style="width:14%;">دسته‌بندی</th>
-      <th style="width:10%;">تعداد</th>
       <th style="width:12%;">قیمت</th>
+      <th style="width:10%;">تعداد</th>
       <th style="width:12%;">مجموع</th>
     </tr>
   </thead>
