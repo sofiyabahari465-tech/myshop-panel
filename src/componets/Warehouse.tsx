@@ -398,8 +398,8 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
       <th style="width:10%;">کد</th>
       <th style="width:13%;">شهر</th>
       <th style="width:10%;">وضعیت</th>
-      <th style="width:14%;">کالاهای دارای موجودی</th>
-      <th style="width:18%;">ارزش کل</th>
+      <th style="width:14%;">تعداد</th>
+      <th style="width:18%;">مجموع</th>
     </tr>
   </thead>
   <tbody>
