@@ -1285,22 +1285,62 @@ const RepresentativeDashboard: React.FC<Props> = ({
   );
 
   const salesLast10Days = useMemo(() => {
+    // محاسبه تاریخ امروز شمسی
     const now = new Date();
-    const start = new Date(now);
+    const persianPartsNow = new Intl.DateTimeFormat('en-US-u-ca-persian', {
+      year: 'numeric', month: '2-digit', day: '2-digit',
+    }).formatToParts(now);
+    const persianYearNow = parseInt(persianPartsNow.find((p) => p.type === 'year')?.value || '0', 10);
+    const persianMonthNow = parseInt(persianPartsNow.find((p) => p.type === 'month')?.value || '0', 10);
+    const persianDayNow = parseInt(persianPartsNow.find((p) => p.type === 'day')?.value || '0', 10);
 
-    start.setDate(start.getDate() - 9);
+    // تبدیل تاریخ شمسی (1405/07/20) به روزهای از ابتدای سال شمسی
+    const persianDateToDayOfYear = (dateStr: string): number => {
+      if (!dateStr || typeof dateStr !== 'string') return -1;
+      const parts = dateStr.split('/');
+      if (parts.length < 3) return -1;
+      const pm = parseInt(parts[1], 10);
+      const pd = parseInt(parts[2], 10);
+      if (!pm || !pd) return -1;
+      // ماه‌های ۱-۶: ۳۱ روز، ۷-۱۱: ۳۰ روز، ۱۲: ۲۹ روز
+      let dayOfYear = pd;
+      const daysInMonth = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29];
+      for (let i = 0; i < pm - 1; i++) {
+        dayOfYear += daysInMonth[i];
+      }
+      return dayOfYear;
+    };
+
+    const nowDayOfYear = persianDateToDayOfYear(
+      `${persianYearNow}/${persianMonthNow}/${persianDayNow}`,
+    );
+
+    // اول روش ۱: بر اساس createdAt انگلیسی
+    const tenDaysAgo = new Date(now);
+    tenDaysAgo.setDate(tenDaysAgo.getDate() - 9);
 
     return salesReports
       .filter((report) => {
-        const date = report.createdAt
-          ? new Date(report.createdAt)
-          : new Date(Number.NaN);
-
-        return (
-          !Number.isNaN(date.getTime()) &&
-          date >= start &&
-          date <= now
-        );
+        // روش ۱: createdAt
+        if (report.createdAt) {
+          const date = new Date(report.createdAt);
+          if (!Number.isNaN(date.getTime()) && date >= tenDaysAgo && date <= now) {
+            return true;
+          }
+        }
+        // روش ۲: saleDate شمسی
+        if (report.saleDate && nowDayOfYear > 0) {
+          const parts = String(report.saleDate).split('/');
+          if (parts.length < 3) return false;
+          const saleYear = parseInt(parts[0], 10);
+          const saleDayOfYear = persianDateToDayOfYear(report.saleDate);
+          if (saleDayOfYear < 0) return false;
+          if (saleYear === persianYearNow) {
+            const diff = nowDayOfYear - saleDayOfYear;
+            if (diff >= 0 && diff <= 9) return true;
+          }
+        }
+        return false;
       })
       .reduce(
         (sum, report) =>
@@ -1310,23 +1350,26 @@ const RepresentativeDashboard: React.FC<Props> = ({
   }, [salesReports]);
 
   const salesInAllowedDays = useMemo(() => {
+    // محاسبه ماه و سال شمسی جاری
     const now = new Date();
+    const persianPartsNow = new Intl.DateTimeFormat('en-US-u-ca-persian', {
+      year: 'numeric', month: '2-digit', day: '2-digit',
+    }).formatToParts(now);
+    const persianYearNow = persianPartsNow.find((p) => p.type === 'year')?.value || '';
+    const persianMonthNow = persianPartsNow.find((p) => p.type === 'month')?.value || '';
+    const currentPersianMonthKey = `${persianYearNow}/${persianMonthNow}`;
 
     return salesReports
       .filter((report) => {
-        const date = report.createdAt
-          ? new Date(report.createdAt)
-          : new Date(Number.NaN);
-
-        return (
-          !Number.isNaN(date.getTime()) &&
-          date.getMonth() === now.getMonth() &&
-          date.getFullYear() ===
-            now.getFullYear() &&
-          [10, 20, 30].includes(
-            date.getDate(),
-          )
-        );
+        const saleDateStr = String(report.saleDate || '');
+        if (!saleDateStr) return false;
+        const parts = saleDateStr.split('/');
+        if (parts.length < 3) return false;
+        const reportYear = parts[0];
+        const reportMonth = parts[1];
+        const reportDay = parseInt(parts[2], 10);
+        if (`${reportYear}/${reportMonth}` !== currentPersianMonthKey) return false;
+        return [10, 20, 30].includes(reportDay);
       })
       .reduce(
         (sum, report) =>
