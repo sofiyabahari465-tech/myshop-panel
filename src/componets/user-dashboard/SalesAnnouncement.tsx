@@ -605,9 +605,9 @@ const SalesAnnouncement = ({
           confirmedSale: true,
           items: selectedSaleItems.map((item) => ({
             productId: item.productId,
-            productName: item.productName,
-            brand: item.brand,
-            category: item.category,
+            productName: item.product.productName,
+            brand: item.product.brand,
+            category: item.product.category,
             quantity: item.saleQuantity,
           })),
         },

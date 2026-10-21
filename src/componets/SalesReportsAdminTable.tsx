@@ -29,7 +29,9 @@ type SalesReportItem = {
   title?: string;
   name?: string;
   brand?: string;
+  brandName?: string;
   category?: string;
+  categoryName?: string;
   quantity?: number | string;
   unitPrice?: number | string;
   price?: number | string;
