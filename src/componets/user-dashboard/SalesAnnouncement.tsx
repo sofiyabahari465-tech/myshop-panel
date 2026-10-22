@@ -319,6 +319,402 @@ const SalesAnnouncement = ({
     [printSettings],
   );
 
+  // ===== تابع چاپ تک‌گزارش فروش (مثل ادمین - با window.open) =====
+  const handlePrintSingleReport = useCallback(
+    (report: SalesReportApi) => {
+      const printWindow = window.open(
+        '',
+        '_blank',
+        'width=900,height=700',
+      );
+      if (!printWindow) {
+        alert('لطفاً popup blocker را غیرفعال کنید');
+        return;
+      }
+
+      const today = new Intl.DateTimeFormat(
+        'fa-IR-u-ca-persian',
+        {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+        },
+      ).format(new Date());
+
+      const items = Array.isArray(report.items)
+        ? report.items
+        : [];
+
+      const numberToFa = (value: unknown): string => {
+        const num = Number(
+          String(value ?? '')
+            .replace(/[۰-۹]/g, (d) =>
+              String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)),
+            )
+            .replace(/[٠-٩]/g, (d) =>
+              String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)),
+            )
+            .replace(/[,٬،\s]/g, '')
+            .replace(/[^\d.-]/g, ''),
+        );
+        return Number.isFinite(num)
+          ? num.toLocaleString('fa-IR')
+          : '۰';
+      };
+
+      const toToman = (value: unknown): string => {
+        return `${numberToFa(value)} تومان`;
+      };
+
+      const itemsHtml = items
+        .map(
+          (item, i) => `
+        <tr>
+          <td style="text-align:center;">${i + 1}</td>
+          <td>${item.productName || '—'}</td>
+          <td style="text-align:center;">${item.brand || item.brandName || '—'}</td>
+          <td style="text-align:center;">${item.category || item.categoryName || '—'}</td>
+          <td style="text-align:center;">${numberToFa(item.unitPrice)} تومان</td>
+          <td style="text-align:center;">${numberToFa(item.quantity) || '—'}</td>
+          <td style="text-align:center;">${numberToFa(
+            item.totalPrice ??
+              (Number(item.quantity || 0) *
+                Number(item.unitPrice || 0)),
+          )} تومان</td>
+        </tr>`,
+        )
+        .join('');
+
+      const totalItems =
+        report.totalItems ?? items.length;
+      const totalAmount = report.totalAmount ?? 0;
+
+      printWindow.document.write(`<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>چاپ گزارش فروش - ${report.representativeName || ''}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+body { font-family: 'Vazirmatn', Tahoma, Arial, sans-serif; direction: rtl; padding: 20px; background: #fff; color: #111; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 3px solid #0f766e; padding-bottom: 15px; }
+.logo { display: flex; align-items: center; gap: 15px; }
+.logo img { max-height: 60px; max-width: 200px; }
+.company-info h1 { font-size: 18px; margin: 0; color: #0f766e; }
+.company-info p { font-size: 12px; color: #555; margin: 2px 0; }
+.report-title { text-align: center; margin: 18px 0 12px; }
+.report-title h2 { font-size: 22px; margin: 0; color: #0f766e; }
+.report-title p { font-size: 12px; color: #666; margin-top: 5px; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.info-card { border: 1px solid #ddd; border-radius: 8px; padding: 12px 15px; }
+.info-card .label { font-size: 11px; color: #6b7280; margin-bottom: 3px; }
+.info-card .value { font-size: 14px; font-weight: bold; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #ddd; padding: 8px 10px; font-size: 12px; text-align: right; }
+th { background: #0f766e !important; color: #fff; font-weight: bold; text-align: center; }
+tr:nth-child(even) td { background: #f9fafb; }
+.print-summary-section { break-inside: avoid; page-break-inside: avoid; }
+.summary { display: flex; gap: 20px; margin-top: 20px; justify-content: space-around; }
+.summary-card { border: 1px solid #ddd; border-radius: 8px; padding: 15px 25px; text-align: center; min-width: 150px; background: #f9fafb; }
+.summary-card .label { font-size: 11px; color: #6b7280; }
+.summary-card .value { font-size: 20px; font-weight: bold; margin-top: 5px; color: #0f766e; }
+.footer { margin-top: 36px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
+@media print { @page { size: A4 portrait; margin: 10mm; } body { padding: 0; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">
+    <img src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png" alt="لوگو" onerror="this.style.display='none'" />
+    <div class="company-info">
+      <h1>بازرگانی مهر امین</h1>
+      <p>سامانه مدیریت نمایندگی و انبار</p>
+      <p>تلفن: ۰۲۸-۳۳۲۳۶۰۷۲</p>
+    </div>
+  </div>
+  <div style="font-size: 12px; text-align: left;">
+    <p><strong>تاریخ چاپ:</strong> ${today}</p>
+  </div>
+</div>
+
+<div class="report-title">
+  <h2>گزارش اعلام فروش</h2>
+  <p>گزارش فروش نمایندگی ${report.representativeName || ''}</p>
+</div>
+
+<div class="info-grid">
+  <div class="info-card">
+    <div class="label">نام نمایندگی</div>
+    <div class="value">${report.representativeName || '—'}</div>
+  </div>
+  <div class="info-card">
+    <div class="label">کد نمایندگی</div>
+    <div class="value">${report.representativeCode || '—'}</div>
+  </div>
+  <div class="info-card">
+    <div class="label">شهر</div>
+    <div class="value">${report.representativeCity || '—'}</div>
+  </div>
+  <div class="info-card">
+    <div class="label">تاریخ ثبت</div>
+    <div class="value">${report.saleDate || report.saleDateJalali || '—'}</div>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 5%;">ردیف</th>
+      <th style="width: 25%;">عنوان</th>
+      <th style="width: 12%;">برند</th>
+      <th style="width: 13%;">دسته‌بندی</th>
+      <th style="width: 15%;">قیمت</th>
+      <th style="width: 10%;">تعداد</th>
+      <th style="width: 20%;">مجموع</th>
+    </tr>
+  </thead>
+  <tbody>
+    ${itemsHtml || '<tr><td colspan="7" style="text-align:center;color:#9ca3af;padding:30px;">هیچ کالایی در این گزارش ثبت نشده است.</td></tr>'}
+  </tbody>
+</table>
+
+<div class="print-summary-section">
+  <table style="margin-top: 15px;">
+    <tbody>
+      <tr style="background: #ecfdf5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact;">
+        <td colspan="5" style="text-align:left;"><strong>جمع کل:</strong></td>
+        <td style="text-align:center;"><strong>${numberToFa(totalItems)}</strong></td>
+        <td style="text-align:center;"><strong>${toToman(totalAmount)}</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <div class="summary-card">
+      <div class="label">تعداد اقلام</div>
+      <div class="value">${numberToFa(totalItems)}</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">مجموع فروش</div>
+      <div class="value">${numberToFa(totalAmount)}<br><span style="font-size:12px;">تومان</span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
+    <p>بازرگانی مهر امین</p>
+  </div>
+</div>
+
+</body>
+</html>`);
+      printWindow.document.close();
+      printWindow.focus();
+      setTimeout(() => {
+        printWindow.print();
+      }, 800);
+    },
+    [],
+  );
+
+  // ===== تابع چاپ همه‌ی گزارش‌ها (مثل ادمین - با window.open) =====
+  const handlePrintAllReports = useCallback(
+    (reports: SalesReportApi[]) => {
+      const printWindow = window.open(
+        '',
+        '_blank',
+        'width=1000,height=720',
+      );
+      if (!printWindow) {
+        alert('لطفاً popup blocker را غیرفعال کنید');
+        return;
+      }
+
+      const today = new Intl.DateTimeFormat(
+        'fa-IR-u-ca-persian',
+        {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+        },
+      ).format(new Date());
+
+      const numberToFa = (value: unknown): string => {
+        const num = Number(
+          String(value ?? '')
+            .replace(/[۰-۹]/g, (d) =>
+              String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)),
+            )
+            .replace(/[٠-٩]/g, (d) =>
+              String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)),
+            )
+            .replace(/[,٬،\s]/g, '')
+            .replace(/[^\d.-]/g, ''),
+        );
+        return Number.isFinite(num)
+          ? num.toLocaleString('fa-IR')
+          : '۰';
+      };
+
+      const toToman = (value: unknown): string => {
+        return `${numberToFa(value)} تومان`;
+      };
+
+      const rowsHtml = reports
+        .map((report, index) => {
+          const items = Array.isArray(report.items)
+            ? report.items
+            : [];
+          const itemsHtml = items
+            .map(
+              (item) => `
+        <tr>
+          <td style="text-align:center;">${index + 1}</td>
+          <td>${item.productName || '—'}</td>
+          <td style="text-align:center;">${item.brand || item.brandName || '—'}</td>
+          <td style="text-align:center;">${item.category || item.categoryName || '—'}</td>
+          <td style="text-align:center;">${numberToFa(item.unitPrice)} تومان</td>
+          <td style="text-align:center;">${numberToFa(item.quantity) || '—'}</td>
+          <td style="text-align:center;">${numberToFa(
+            item.totalPrice ??
+              (Number(item.quantity || 0) *
+                Number(item.unitPrice || 0)),
+          )} تومان</td>
+        </tr>`,
+            )
+            .join('');
+
+          return `
+        <div class="report-card">
+          <div class="report-card-header">
+            <h3>گزارش فروش ${index + 1} - ${report.representativeName || '—'}</h3>
+            <p>کد نمایندگی: ${report.representativeCode || '—'} | شهر: ${report.representativeCity || '—'}</p>
+            <p>تاریخ: ${report.saleDate || '—'}</p>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 5%;">ردیف</th>
+                <th style="width: 30%;">عنوان</th>
+                <th style="width: 12%;">برند</th>
+                <th style="width: 13%;">دسته‌بندی</th>
+                <th style="width: 12%;">قیمت</th>
+                <th style="width: 10%;">تعداد</th>
+                <th style="width: 13%;">مجموع</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${itemsHtml || '<tr><td colspan="7" style="text-align:center;color:#9ca3af;padding:20px;">هیچ کالایی ثبت نشده است.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      `;
+        })
+        .join('');
+
+      const totalAmount = reports.reduce(
+        (sum, r) => sum + Number(r.totalAmount || 0),
+        0,
+      );
+      const totalItems = reports.reduce(
+        (sum, r) => sum + Number(r.totalItems || 0),
+        0,
+      );
+
+      printWindow.document.write(`<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>چاپ همه گزارش‌های فروش</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+body { font-family: 'Vazirmatn', Tahoma, Arial, sans-serif; direction: rtl; padding: 20px; background: #fff; color: #111; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 3px solid #0f766e; padding-bottom: 15px; }
+.logo { display: flex; align-items: center; gap: 15px; }
+.logo img { max-height: 60px; max-width: 200px; }
+.company-info h1 { font-size: 18px; margin: 0; color: #0f766e; }
+.company-info p { font-size: 12px; color: #555; margin: 2px 0; }
+.report-title { text-align: center; margin: 20px 0; }
+.report-title h2 { font-size: 22px; margin: 0; color: #0f766e; }
+.report-title p { font-size: 12px; color: #666; margin-top: 5px; }
+.report-card { margin-top: 30px; page-break-inside: avoid; }
+.report-card-header { background: #ecfdf5; padding: 10px; border-radius: 8px; margin-bottom: 10px; }
+.report-card-header h3 { margin: 0; font-size: 14px; color: #0f766e; }
+.report-card-header p { font-size: 11px; color: #666; margin: 3px 0 0; }
+table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+th, td { border: 1px solid #ddd; padding: 6px 8px; font-size: 11px; text-align: right; }
+th { background: #0f766e !important; color: #fff; font-weight: bold; text-align: center; }
+tr:nth-child(even) td { background: #f9fafb; }
+.summary { display: flex; gap: 20px; margin-top: 30px; justify-content: space-around; }
+.summary-card { border: 1px solid #ddd; border-radius: 8px; padding: 15px 25px; text-align: center; min-width: 150px; background: #f9fafb; }
+.summary-card .label { font-size: 11px; color: #6b7280; }
+.summary-card .value { font-size: 18px; font-weight: bold; margin-top: 5px; color: #0f766e; }
+.footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
+@media print { @page { size: A4 portrait; margin: 10mm; } body { padding: 0; } .report-card { page-break-after: always; } .report-card:last-child { page-break-after: auto; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">
+    <img src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png" alt="لوگو" onerror="this.style.display='none'" />
+    <div class="company-info">
+      <h1>بازرگانی مهر امین</h1>
+      <p>سامانه مدیریت نمایندگی و انبار</p>
+      <p>تلفن: ۰۲۸-۳۳۲۳۶۰۷۲</p>
+    </div>
+  </div>
+  <div style="font-size: 12px; text-align: left;">
+    <p><strong>تاریخ چاپ:</strong> ${today}</p>
+    <p><strong>تعداد گزارش‌ها:</strong> ${numberToFa(reports.length)}</p>
+  </div>
+</div>
+
+<div class="report-title">
+  <h2>گزارش جامع اعلام فروش</h2>
+  <p>گزارش همه‌ی فروش‌های ثبت‌شده</p>
+</div>
+
+${rowsHtml}
+
+<div class="summary">
+  <div class="summary-card">
+    <div class="label">تعداد گزارش‌ها</div>
+    <div class="value">${numberToFa(reports.length)}</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">مجموع اقلام</div>
+    <div class="value">${numberToFa(totalItems)}</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">مجموع فروش</div>
+    <div class="value">${numberToFa(totalAmount)}<br><span style="font-size:12px;">تومان</span></div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
+  <p>بازرگانی مهر امین</p>
+</div>
+
+</body>
+</html>`);
+      printWindow.document.close();
+      printWindow.focus();
+      setTimeout(() => {
+        printWindow.print();
+      }, 800);
+    },
+    [],
+  );
+
   const loadSaleProducts = useCallback(
     async () => {
       setLoadingSaleProducts(true);
@@ -1142,7 +1538,7 @@ const SalesAnnouncement = ({
                 <button
                   type="button"
                   onClick={() => {
-                    setPrintAllReports(true);
+                    handlePrintAllReports(salesReports);
                   }}
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-600 px-4 py-2.5 text-xs font-black text-white transition hover:bg-cyan-700"
                 >
@@ -1190,7 +1586,7 @@ const SalesAnnouncement = ({
                       <button
                         type="button"
                         onClick={() => {
-                          setPrintReport(report);
+                          handlePrintSingleReport(report);
                         }}
                         className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-cyan-200 bg-cyan-50 px-3 py-2 text-xs font-black text-cyan-700 transition hover:bg-cyan-100 dark:border-cyan-900/50 dark:bg-cyan-950/30 dark:text-cyan-300"
                       >
@@ -1305,7 +1701,7 @@ const SalesAnnouncement = ({
                           <button
                             type="button"
                             onClick={() => {
-                              setPrintReport(report);
+                              handlePrintSingleReport(report);
                             }}
                             className="inline-flex items-center gap-2 rounded-xl border border-cyan-200 bg-cyan-50 px-3 py-2 text-xs font-black text-cyan-700 transition hover:bg-cyan-100 dark:border-cyan-900/50 dark:bg-cyan-950/30 dark:text-cyan-300"
                           >
