@@ -295,6 +295,12 @@ const ReturnRequestPrint = ({
           border-bottom: 3px solid #0f766e;
         }
 
+        #return-print-root .return-print-header .return-print-logo-block {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+        }
+
 
         #return-print-root .return-print-header h1 {
           margin: 0;
@@ -545,24 +551,47 @@ const ReturnRequestPrint = ({
 
       <main className="return-print-paper">
         <header className="return-print-header">
-          <div>
-            <h1>
+          <div className="return-print-logo-block">
+            <img
+              src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png"
+              alt="لوگو"
+              style={{ maxHeight: '64px', maxWidth: '200px', borderRadius: '8px', objectFit: 'contain' }}
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+            <div>
+              <h1 style={{ color: '#0f766e', margin: 0, fontSize: '16pt' }}>
+                بازرگانی مهر امین
+              </h1>
+              <p style={{ margin: '3px 0 0', fontSize: '9pt', color: '#4b5563' }}>
+                سامانه مدیریت نمایندگی و انبار
+              </p>
+              <p style={{ margin: '3px 0 0', fontSize: '9pt', color: '#4b5563' }}>
+                تلفن: ۰۲۸-۳۳۲۳۶۰۷۲
+              </p>
+            </div>
+          </div>
+
+          <div style={{ textAlign: 'center', flex: 1 }}>
+            <h1 style={{ color: '#0f766e', margin: 0, fontSize: '16pt' }}>
               {representativeName ||
                 'گزارش درخواست‌های مرجوعی'}
             </h1>
-
-
-            <p>
+            <p style={{ margin: '4px 0 0', fontSize: '9pt', color: '#4b5563' }}>
               {representativeCity
                 ? `شهر: ${representativeCity}`
                 : 'گزارش درخواست‌های مرجوعی'}
             </p>
           </div>
 
-
-          <div>
-            <h1>گزارش مرجوعی</h1>
-            <p>تاریخ چاپ: {formatDate()}</p>
+          <div style={{ textAlign: 'left', minWidth: '180px' }}>
+            <h1 style={{ color: '#0f766e', margin: 0, fontSize: '14pt' }}>
+              گزارش مرجوعی
+            </h1>
+            <p style={{ margin: '4px 0 0', fontSize: '9pt', color: '#4b5563' }}>
+              تاریخ چاپ: {formatDate()}
+            </p>
           </div>
         </header>
 

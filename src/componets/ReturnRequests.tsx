@@ -477,15 +477,48 @@ const ReturnRequests: React.FC = () => {
               align-items: flex-start;
               justify-content: space-between;
               gap: 24px;
-              border-bottom: 2px solid #111827;
+              border-bottom: 3px solid #0f766e;
               padding-bottom: 16px;
               margin-bottom: 20px;
+            }
+
+            .header-logo {
+              display: flex;
+              align-items: center;
+              gap: 14px;
+            }
+
+            .header-logo img {
+              max-height: 64px;
+              max-width: 200px;
+              border-radius: 8px;
+              object-fit: contain;
+            }
+
+            .header-company-info h1 {
+              margin: 0;
+              font-size: 19px;
+              font-weight: 900;
+              color: #0f766e;
+            }
+
+            .header-company-info p {
+              margin: 3px 0;
+              color: #4b5563;
+              font-size: 12px;
+              line-height: 1.7;
+            }
+
+            .header-title-block {
+              text-align: center;
+              flex: 1;
             }
 
             .title {
               margin: 0;
               font-size: 23px;
               font-weight: 900;
+              color: #0f766e;
             }
 
             .subtitle {
@@ -500,6 +533,11 @@ const ReturnRequests: React.FC = () => {
               color: #374151;
               font-size: 12px;
               line-height: 2;
+              min-width: 180px;
+            }
+
+            .header-details strong {
+              color: #111827;
             }
 
             .status {
@@ -578,7 +616,16 @@ const ReturnRequests: React.FC = () => {
         <body>
           <main class="sheet">
             <header class="header">
-              <div>
+              <div class="header-logo">
+                <img src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png" alt="لوگو" onerror="this.style.display='none'" />
+                <div class="header-company-info">
+                  <h1>بازرگانی مهر امین</h1>
+                  <p>سامانه مدیریت نمایندگی و انبار</p>
+                  <p>تلفن: ۰۲۸-۳۳۲۳۶۰۷۲</p>
+                </div>
+              </div>
+
+              <div class="header-title-block">
                 <h1 class="title">برگه درخواست مرجوعی</h1>
 
                 <div class="subtitle">
@@ -589,12 +636,12 @@ const ReturnRequests: React.FC = () => {
 
               <div class="header-details">
                 <div>
-                  تاریخ ثبت:
+                  <strong>تاریخ ثبت:</strong>
                   ${escapeHtml(formatDateTime(request.createdAt))}
                 </div>
 
                 <div>
-                  وضعیت:
+                  <strong>وضعیت:</strong>
                   <span class="status">
                     ${escapeHtml(statusLabel)}
                   </span>
