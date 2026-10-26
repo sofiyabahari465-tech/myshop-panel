@@ -476,37 +476,37 @@ const InventoryPrint = ({
         #inventory-print-root .inventory-print-meta {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 8px;
+          gap: 4px;
           width: 100%;
           max-width: 100%;
-          margin: 14px 0;
+          margin: 8px 0;
         }
 
 
 
         #inventory-print-root .inventory-print-meta-box {
           min-width: 0;
-          padding: 8px;
+          padding: 4px 6px;
           border: 1px solid #d1d5db;
           background: #f9fafb;
-          font-size: 8pt;
+          font-size: 7pt;
         }
 
 
 
         #inventory-print-root .inventory-print-info-box {
           display: block;
-          padding: 10px;
+          padding: 5px 6px;
         }
 
 
 
         #inventory-print-root .inventory-print-info-title {
-          margin: 0 0 6px;
-          padding-bottom: 5px;
+          margin: 0 0 3px;
+          padding-bottom: 2px;
           border-bottom: 1px solid #d1d5db;
           color: var(--inventory-primary);
-          font-size: 9pt;
+          font-size: 7pt;
           font-weight: 900;
         }
 
@@ -516,9 +516,9 @@ const InventoryPrint = ({
           display: flex;
           align-items: flex-start;
           justify-content: space-between;
-          gap: 10px;
-          margin-top: 4px;
-          font-size: 8pt;
+          gap: 6px;
+          margin-top: 2px;
+          font-size: 7pt;
         }
 
 
