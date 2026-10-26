@@ -338,13 +338,13 @@ const Sidebar: React.FC<Props> = ({
                 style={{
                   animationDelay: `${index * 40}ms`,
                 }}
-                className={`group flex w-full items-center gap-2.5 rounded-lg border px-2.5 py-1.5 text-right  transition-all duration-600 animate-slide-in-right ${
+                className={`group flex w-full items-center gap-2.5 rounded-lg border px-3 py-2 text-right  transition-all duration-600 animate-slide-in-right ${
                   isActive ? activeClass : normalClass
                 }`}
               >
                 <span className="shrink-0 transition-transform duration-300 group-hover:scale-110">
                   <IconComponent
-                    className={`h-4 w-4 ${
+                    className={`h-5 w-5 ${
                       isActive
                         ? activeIconClass
                         : normalIconClass
@@ -353,7 +353,7 @@ const Sidebar: React.FC<Props> = ({
                 </span>
 
 
-                <span className="min-w-0 flex-1 text-[11px] font-bold leading-4">
+                <span className="min-w-0 flex-1 text-[13px] font-bold leading-5">
                   {item.label}
                 </span>
 
