@@ -1,10 +1,12 @@
 import React from 'react';
 import {
   Banknote,
+  Bell,
   Boxes,
   ClipboardCheck,
   Headset,
   LayoutDashboard,
+  Megaphone,
   RotateCcw,
   Store,
   Truck,
@@ -112,6 +114,18 @@ const Sidebar: React.FC<Props> = ({
       label: 'یادداشت‌ها',
       icon: StickyNote,
       accent: 'amber',
+    },
+    {
+      id: 'notifications',
+      label: 'اطلاع‌رسانی',
+      icon: Bell,
+      accent: 'cyan',
+    },
+    {
+      id: 'announcements',
+      label: 'اعلام اطلاعیه‌ها',
+      icon: Megaphone,
+      accent: 'orange',
     },
     // {
     //   id: 'settings',

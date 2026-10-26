@@ -22,6 +22,8 @@ import UserDashboardPage from './pages/UserDashboardPage';
 import RepresentativeWarrantyPage from './componets/RepresentativeWarrantyPage';
 import AdminWarrantiesPage from './pages/AdminWarrantiesPage';
 import NotesPage from './componets/NotesPage';
+import Announcements from './componets/Announcements';
+import Notifications from './componets/user-dashboard/Notifications';
 
 import { useProducts } from './hooks/useProducts';
 import { useRepresentativeFiles } from './hooks/useRepresentativeFiles';
@@ -1013,9 +1015,12 @@ function App() {
                                     'notes'
                                   ? 'یادداشت‌ها'
                                   : activeSection ===
-                                      'warranties'
-                                    ? 'مدیریت گارانتی'
-                                    : 'پنل مدیریت';
+                                      'announcements'
+                                    ? 'اعلام اطلاعیه‌ها'
+                                    : activeSection ===
+                                        'warranties'
+                                      ? 'مدیریت گارانتی'
+                                      : 'پنل مدیریت';
 
   const adminPageDescription =
     viewingRepresentativeWarehouse
@@ -1058,9 +1063,12 @@ function App() {
                                     'notes'
                                   ? 'مدیریت یادداشت‌های شخصی'
                                   : activeSection ===
-                                      'warranties'
-                                    ? 'مشاهده و رسیدگی به درخواست‌های گارانتی نمایندگان'
-                                    : '';
+                                      'announcements'
+                                    ? 'مدیریت اطلاعیه‌ها و ارسال پیامک به نمایندگان'
+                                    : activeSection ===
+                                        'warranties'
+                                      ? 'مشاهده و رسیدگی به درخواست‌های گارانتی نمایندگان'
+                                      : '';
 
   const representativePageTitle =
     activeSection === 'dashboard'
@@ -1091,7 +1099,10 @@ function App() {
                           'notes'
                         ? 'یادداشت‌ها'
                         : activeSection ===
-                            'warranties'
+                            'notifications'
+                          ? 'اطلاع‌رسانی'
+                          : activeSection ===
+                              'warranties'
                           ? 'استفاده از گارانتی'
                           : 'داشبورد نمایندگی';
 
@@ -1124,9 +1135,12 @@ function App() {
                           'notes'
                         ? 'مدیریت یادداشت‌های شخصی'
                         : activeSection ===
-                            'warranties'
-                          ? 'ثبت درخواست استفاده از گارانتی برای کالاهای موجود در انبار'
-                          : '';
+                            'notifications'
+                          ? 'اطلاعیه‌ها و خبرهای جدید از مدیریت'
+                          : activeSection ===
+                              'warranties'
+                            ? 'ثبت درخواست استفاده از گارانتی برای کالاهای موجود در انبار'
+                            : '';
 
   if (
     !getToken() ||
@@ -1212,6 +1226,8 @@ function App() {
               <RepresentativeWarrantyPage />
             ) : activeSection === 'notes' ? (
               <NotesPage />
+            ) : activeSection === 'notifications' ? (
+              <Notifications />
             ) : activeSection === 'products' ? (
               <ProductsTable
                 products={
@@ -1232,6 +1248,8 @@ function App() {
             )
           ) : activeSection === 'notes' ? (
             <NotesPage />
+          ) : activeSection === 'announcements' ? (
+            <Announcements apiUrl={API_URL} />
           ) : activeSection === 'warranties' ? (
             <AdminWarrantiesPage />
           ) : viewingRepDashboard ? (

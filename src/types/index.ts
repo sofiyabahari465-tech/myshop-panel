@@ -22,7 +22,9 @@ export type Section =
   | 'support'
   | 'support-requests'
   | 'notes'
-  | 'warranties';
+  | 'warranties'
+  | 'announcements'
+  | 'notifications';
 
 export interface Product {
   id: string;
