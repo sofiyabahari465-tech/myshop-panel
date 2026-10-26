@@ -294,7 +294,7 @@ const RepresentativeWarrantyPage: React.FC = () => {
       formData.append('customerPhone', customerPhone.replace(/[\s-]/g, ''));
       formData.append('productId', selectedProduct.productId);
       formData.append('quantity', String(quantity));
-      formData.append('issueDescription', issueDescription.trim());
+      formData.append('issueDescription', 'ثبت گارانتی اولیه - بدون شرح مشکل');
 
       if (!imageFile) {
         throw new Error('فایلی انتخاب نشده است.');
@@ -669,9 +669,20 @@ const RepresentativeWarrantyPage: React.FC = () => {
             </div>
           </div>
 
-          <span className="w-fit rounded-lg border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-700">
-            وضعیت پس از ثبت: در انتظار بررسی
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="w-fit rounded-lg border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-700">
+              وضعیت پس از ثبت: در انتظار بررسی
+            </span>
+
+            <button
+              type="button"
+              onClick={openUseWarrantyModal}
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-l from-emerald-600 to-teal-500 px-4 py-1.5 text-xs font-black text-white shadow-lg shadow-emerald-500/25 transition-all hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0"
+            >
+              <ShieldCheck className="h-4 w-4" />
+              استفاده از گارانتی
+            </button>
+          </div>
         </div>
 
 
@@ -706,21 +717,6 @@ const RepresentativeWarrantyPage: React.FC = () => {
                     {submitSuccess}
                   </p>
                 </div>
-              </div>
-
-              <div className="mt-4 flex flex-col gap-3 border-t border-emerald-200 pt-4 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-xs font-bold text-emerald-700">
-                  برای ثبت درخواست استفاده از گارانتی روی دکمه زیر بزنید.
-                </p>
-
-                <button
-                  type="button"
-                  onClick={openUseWarrantyModal}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-emerald-600 to-teal-500 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-emerald-500/25 transition-all hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0"
-                >
-                  <ShieldCheck className="h-4 w-4" />
-                  استفاده از گارانتی
-                </button>
               </div>
             </div>
           ) : null}
@@ -950,31 +946,6 @@ const RepresentativeWarrantyPage: React.FC = () => {
                 </p>
               </div>
             </div>
-          </div>
-
-
-          <div className="mb-8">
-            <label className="block">
-              <span className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-700">
-                <AlertCircle className="h-4 w-4 text-sky-600" />
-                شرح مشکل کالا{' '}
-                <span className="text-rose-500">*</span>
-              </span>
-
-              <textarea
-                rows={5}
-                value={issueDescription}
-                onChange={(event) => {
-                  setIssueDescription(event.target.value);
-                }}
-                placeholder="مشکل یا خرابی کالا را با جزئیات توضیح دهید؛ مثال: نشتی از محل اتصال، شکستگی بدنه، عملکرد نادرست و..."
-                className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium leading-7 text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
-              />
-            </label>
-
-            <p className="mt-2 text-xs font-medium text-slate-400">
-              حداقل ۱۰ کاراکتر وارد کنید.
-            </p>
           </div>
 
 
