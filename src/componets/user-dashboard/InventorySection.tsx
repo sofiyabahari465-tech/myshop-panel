@@ -125,6 +125,10 @@ const normalizeSearchText = (
     .replace(/ك/g, 'ک')
     .replace(/[\u200c\u200e\u200f\u00a0]/g, ' ')
     .replace(/\s+/g, ' ')
+    .replace(/\s*خودرو\s*/g, ' ')
+    .replace(/\s*خودرو$/g, '')
+    .replace(/^خودرو\s*/g, '')
+    .trim()
     .toLowerCase();
 };
 
