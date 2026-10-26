@@ -216,7 +216,7 @@ const Sidebar: React.FC<Props> = ({
 
       <aside
         dir="rtl"
-        className={`fixed top-0 right-0 z-50 flex h-screen w-72 flex-col border-l border-gray-700 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 shadow-2xl transition-all duration-500 ease-in-out lg:top-[73px] lg:h-[calc(100vh-73px)] ${
+        className={`fixed top-0 right-0 z-50 flex h-screen w-60 flex-col border-l border-gray-700 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 shadow-2xl transition-all duration-500 ease-in-out lg:top-[73px] lg:h-[calc(100vh-73px)] ${
           isOpen
             ? 'translate-x-0'
             : 'translate-x-full overflow-hidden lg:w-0 lg:translate-x-0'
@@ -338,13 +338,13 @@ const Sidebar: React.FC<Props> = ({
                 style={{
                   animationDelay: `${index * 40}ms`,
                 }}
-                className={`group flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-right  transition-all duration-600 animate-slide-in-right ${
+                className={`group flex w-full items-center gap-2.5 rounded-lg border px-2.5 py-1.5 text-right  transition-all duration-600 animate-slide-in-right ${
                   isActive ? activeClass : normalClass
                 }`}
               >
                 <span className="shrink-0 transition-transform duration-300 group-hover:scale-110">
                   <IconComponent
-                    className={`h-5 w-5 ${
+                    className={`h-4 w-4 ${
                       isActive
                         ? activeIconClass
                         : normalIconClass
@@ -353,7 +353,7 @@ const Sidebar: React.FC<Props> = ({
                 </span>
 
 
-                <span className="min-w-0 flex-1 text-[12px] font-bold leading-5">
+                <span className="min-w-0 flex-1 text-[11px] font-bold leading-4">
                   {item.label}
                 </span>
 
