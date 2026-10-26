@@ -619,9 +619,9 @@ const ReturnRequests: React.FC = () => {
               <div class="header-logo">
                 <img src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png" alt="لوگو" onerror="this.style.display='none'" />
                 <div class="header-company-info">
-                  <h1>بازرگانی مهر امین</h1>
+                  <h1>هلدینگ مهر</h1>
                   <p>سامانه مدیریت نمایندگی و انبار</p>
-                  <p>تلفن: ۰۲۸-۳۳۲۳۶۰۷۲</p>
+                  <p>تلفن: ۰۲۱-۹۳۱۱۱۰۲۱</p>
                 </div>
               </div>
 

@@ -431,9 +431,9 @@ tr:nth-child(even) td { background: #f9fafb; }
   <div class="logo">
     <img src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png" alt="لوگو" onerror="this.style.display='none'" />
     <div class="company-info">
-      <h1>بازرگانی مهر امین</h1>
+      <h1>هلدینگ مهر</h1>
       <p>سامانه مدیریت نمایندگی و انبار</p>
-      <p>تلفن: ۰۲۸-۳۳۲۳۶۰۷۲</p>
+      <p>تلفن: ۰۲۱-۹۳۱۱۱۰۲۱</p>
     </div>
   </div>
   <div style="font-size: 12px; text-align: left;">
@@ -506,7 +506,7 @@ tr:nth-child(even) td { background: #f9fafb; }
 
   <div class="footer">
     <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
-    <p>بازرگانی مهر امین</p>
+    <p>هلدینگ مهر</p>
   </div>
 </div>
 
@@ -666,9 +666,9 @@ tr:nth-child(even) td { background: #f9fafb; }
   <div class="logo">
     <img src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png" alt="لوگو" onerror="this.style.display='none'" />
     <div class="company-info">
-      <h1>بازرگانی مهر امین</h1>
+      <h1>هلدینگ مهر</h1>
       <p>سامانه مدیریت نمایندگی و انبار</p>
-      <p>تلفن: ۰۲۸-۳۳۲۳۶۰۷۲</p>
+      <p>تلفن: ۰۲۱-۹۳۱۱۱۰۲۱</p>
     </div>
   </div>
   <div style="font-size: 12px; text-align: left;">
@@ -701,7 +701,7 @@ ${rowsHtml}
 
 <div class="footer">
   <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
-  <p>بازرگانی مهر امین</p>
+  <p>هلدینگ مهر</p>
 </div>
 
 </body>

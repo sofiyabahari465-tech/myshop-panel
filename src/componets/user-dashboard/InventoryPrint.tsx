@@ -1150,7 +1150,7 @@ const InventoryPrint = ({
 
             <div className="inventory-print-info-row">
               <span>نام شخص / شرکت:</span>
-              <strong>بازرگانی مهر امین</strong>
+              <strong>هلدینگ مهر</strong>
             </div>
 
 
@@ -1164,7 +1164,7 @@ const InventoryPrint = ({
 
             <div className="inventory-print-info-row">
               <span>تلفن شرکت:</span>
-              <strong>028-33236072</strong>
+              <strong>021-93111021</strong>
             </div>
           </div>
 

@@ -11,6 +11,7 @@ import {
   ArrowRight,
   CalendarDays,
   CheckCircle2,
+  ClipboardList,
   Download,
   Eye,
   FileText,
@@ -19,6 +20,7 @@ import {
   Loader2,
   MapPin,
   Package,
+  PackageOpen,
   Plus,
   RefreshCw,
   RotateCcw,
@@ -126,6 +128,32 @@ const formatPrice = (value: unknown): string => {
   return new Intl.NumberFormat('fa-IR').format(
     toNumber(value),
   );
+};
+
+const formatPersianDate = (
+  saleDate?: string,
+  createdAt?: string,
+): string => {
+  // اول saleDate شمسی رو امتحان کن
+  if (saleDate) {
+    const parts = String(saleDate).split('/');
+    if (parts.length === 3) {
+      return saleDate;
+    }
+  }
+  // اگه نبود، createdAt رو به شمسی تبدیل کن
+  if (createdAt) {
+    try {
+      return new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }).format(new Date(createdAt));
+    } catch {
+      return createdAt;
+    }
+  }
+  return '—';
 };
 
 const getRepresentativeLocation = (
@@ -2373,6 +2401,96 @@ const RepresentativeDashboard: React.FC<Props> = ({
             </div>
           )}
         </div>
+      </section>
+
+      {/* ===== باکس اعلام فروش‌های این نماینده ===== */}
+      <section className="overflow-hidden rounded-[30px] border border-blue-100 bg-white p-4 shadow-[0_12px_30px_rgba(55,104,180,0.14)] dark:border-gray-800 dark:bg-gray-900 md:p-6">
+        <div className="mb-5 flex flex-col items-start justify-between gap-3 border-b border-blue-100 pb-4 dark:border-gray-800 sm:flex-row sm:items-center">
+          <div>
+            <h3 className="flex items-center gap-2 text-lg font-black text-slate-800 dark:text-gray-100">
+              <TrendingUp className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+              اعلام فروش‌های این نماینده
+            </h3>
+            <p className="mt-1 text-xs text-slate-500 dark:text-gray-400">
+              لیست کامل اعلام فروش‌های ثبت‌شده توسط این نماینده
+            </p>
+          </div>
+          <div className="flex items-center gap-2 rounded-xl bg-cyan-50 px-3 py-2 dark:bg-cyan-950/30">
+            <ClipboardList className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
+            <span className="text-xs font-black text-cyan-700 dark:text-cyan-300">
+              مجموع: {toPersianNumber(salesReports.length)} گزارش
+            </span>
+          </div>
+        </div>
+
+        {salesLoading ? (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-8 w-8 animate-spin text-cyan-500" />
+            <span className="mr-3 text-sm font-bold text-slate-500 dark:text-gray-400">
+              در حال دریافت فروش‌ها...
+            </span>
+          </div>
+        ) : salesReports.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-10 text-center">
+            <PackageOpen className="mb-3 h-12 w-12 text-slate-300 dark:text-gray-600" />
+            <p className="text-sm font-black text-slate-500 dark:text-gray-400">
+              هنوز فروشی برای این نماینده ثبت نشده است.
+            </p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] text-right text-xs sm:text-sm">
+              <thead className="bg-slate-50 dark:bg-gray-800/80">
+                <tr>
+                  <th className="px-3 py-3 font-black text-slate-500 dark:text-gray-400">
+                    ردیف
+                  </th>
+                  <th className="px-3 py-3 font-black text-slate-500 dark:text-gray-400">
+                    تاریخ ثبت
+                  </th>
+                  <th className="px-3 py-3 font-black text-slate-500 dark:text-gray-400">
+                    تعداد اقلام
+                  </th>
+                  <th className="px-3 py-3 font-black text-slate-500 dark:text-gray-400">
+                    مبلغ کل
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-gray-700">
+                {salesReports.slice(0, 10).map((report, index) => (
+                  <tr
+                    key={report.id || index}
+                    className="transition-colors hover:bg-slate-50 dark:hover:bg-gray-800/60"
+                  >
+                    <td className="px-3 py-3 font-black text-slate-500 dark:text-gray-400">
+                      {toPersianNumber(index + 1)}
+                    </td>
+                    <td className="px-3 py-3 font-bold text-slate-700 dark:text-gray-200">
+                      {formatPersianDate(
+                        report.saleDate,
+                        report.createdAt,
+                      )}
+                    </td>
+                    <td className="px-3 py-3 text-amber-700 dark:text-amber-300">
+                      <span className="font-black">
+                        {toPersianNumber(report.totalItems || 0)}
+                      </span>{' '}
+                      قلم
+                    </td>
+                    <td className="px-3 py-3 font-black text-emerald-700 dark:text-emerald-300">
+                      {formatPrice(report.totalAmount || 0)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {salesReports.length > 10 ? (
+              <div className="mt-3 border-t border-slate-100 pt-3 text-center text-xs text-slate-500 dark:border-gray-700 dark:text-gray-400">
+                نمایش ۱۰ گزارش اول از مجموع {toPersianNumber(salesReports.length)} گزارش
+              </div>
+            ) : null}
+          </div>
+        )}
       </section>
 
       {/* ===== مودال آپلود فایل ===== */}

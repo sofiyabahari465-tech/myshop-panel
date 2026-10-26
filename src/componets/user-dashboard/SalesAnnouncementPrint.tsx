@@ -167,7 +167,7 @@ const getReportTotalAmount = (
 
 const getSettings = (settings?: PrintSettings) => ({
   companyName:
-    settings?.companyName || 'بازرگانی مهر امین',
+    settings?.companyName || 'هلدینگ مهر',
   companySubtitle:
     settings?.companySubtitle ||
     'سامانه مدیریت فروش',
@@ -966,7 +966,7 @@ const PrintContent = ({
 
           <div className="print-info-row">
             <span>نام شخص / شرکت:</span>
-            <strong>بازرگانی مهر امین</strong>
+            <strong>هلدینگ مهر</strong>
           </div>
 
 
@@ -978,7 +978,7 @@ const PrintContent = ({
 
           <div className="print-info-row">
             <span>تلفن شرکت:</span>
-            <strong>028-33236072</strong>
+            <strong>021-93111021</strong>
           </div>
         </div>
 

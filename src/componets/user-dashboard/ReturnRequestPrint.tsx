@@ -562,13 +562,13 @@ const ReturnRequestPrint = ({
             />
             <div>
               <h1 style={{ color: '#0f766e', margin: 0, fontSize: '16pt' }}>
-                بازرگانی مهر امین
+                هلدینگ مهر
               </h1>
               <p style={{ margin: '3px 0 0', fontSize: '9pt', color: '#4b5563' }}>
                 سامانه مدیریت نمایندگی و انبار
               </p>
               <p style={{ margin: '3px 0 0', fontSize: '9pt', color: '#4b5563' }}>
-                تلفن: ۰۲۸-۳۳۲۳۶۰۷۲
+                تلفن: ۰۲۱-۹۳۱۱۱۰۲۱
               </p>
             </div>
           </div>
@@ -611,7 +611,7 @@ const ReturnRequestPrint = ({
 
             <div className="return-print-row">
               <span>نام شخص / شرکت:</span>
-              <strong>بازرگانی مهر امین</strong>
+              <strong>هلدینگ مهر</strong>
             </div>
 
 
@@ -623,7 +623,7 @@ const ReturnRequestPrint = ({
 
             <div className="return-print-row">
               <span>تلفن شرکت:</span>
-              <strong>028-33236072</strong>
+              <strong>021-93111021</strong>
             </div>
           </div>
 

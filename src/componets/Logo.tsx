@@ -12,7 +12,7 @@ interface LogoProps {
 }
 
 /**
- * لوگوی "یدک مهر" - بازرگانی مهر امین
+ * لوگوی "یدک مهر" - هلدینگ مهر
  * با آیکون خفن و گرادیان
  */
 const Logo: React.FC<LogoProps> = ({
@@ -87,7 +87,7 @@ const Logo: React.FC<LogoProps> = ({
             <span
               className={`${sizeClasses.sub} font-medium leading-tight text-slate-500 dark:text-slate-400`}
             >
-              بازرگانی مهر امین
+              هلدینگ مهر
             </span>
           )}
         </div>

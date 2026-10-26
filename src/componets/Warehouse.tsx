@@ -328,10 +328,10 @@ body { font-family: 'Vazirmatn', Tahoma, Arial, sans-serif; direction: rtl; padd
 .report-title { text-align: center; margin: 18px 0 12px; }
 .report-title h2 { font-size: 22px; margin: 0; color: #0f766e; }
 .report-title p { font-size: 12px; color: #666; margin-top: 5px; }
-.info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 14px 0 20px; }
-.info-card { border: 1px solid #ddd; border-radius: 8px; padding: 12px 14px; background: #f9fafb; }
-.info-card .label { font-size: 11px; color: #6b7280; margin-bottom: 4px; }
-.info-card .value { font-size: 16px; font-weight: bold; color: #111; }
+.info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 10px 0 14px; }
+.info-card { border: 1px solid #ddd; border-radius: 6px; padding: 6px 8px; background: #f9fafb; }
+.info-card .label { font-size: 9px; color: #6b7280; margin-bottom: 2px; }
+.info-card .value { font-size: 12px; font-weight: bold; color: #111; }
 table { width: 100%; border-collapse: collapse; margin-top: 10px; }
 th, td { border: 1px solid #ddd; padding: 8px 10px; font-size: 12px; text-align: right; }
 th { background: #0f766e !important; color: #fff; font-weight: bold; text-align: center; }
@@ -355,9 +355,9 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
   <div class="logo">
     <img src="${logoUrl}" alt="لوگو" onerror="this.style.display='none'" />
     <div class="company-info">
-      <h1>بازرگانی مهر امین</h1>
+      <h1>هلدینگ مهر</h1>
       <p>سامانه مدیریت نمایندگی و انبار</p>
-      <p>تلفن: ۰۲۸-۳۳۲۳۶۰۷۲</p>
+      <p>تلفن: ۰۲۱-۹۳۱۱۱۰۲۱</p>
     </div>
   </div>
   <div style="font-size: 12px; text-align: left;">
@@ -435,7 +435,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 
   <div class="footer">
     <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
-    <p>بازرگانی مهر امین</p>
+    <p>هلدینگ مهر</p>
   </div>
 </div>
 
@@ -598,10 +598,10 @@ body { font-family: 'Vazirmatn', Tahoma, Arial, sans-serif; direction: rtl; padd
 .report-title { text-align: center; margin: 18px 0 12px; }
 .report-title h2 { font-size: 22px; margin: 0; color: #0f766e; }
 .report-title p { font-size: 12px; color: #666; margin-top: 5px; }
-.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-.info-card { border: 1px solid #ddd; border-radius: 8px; padding: 12px 15px; }
-.info-card .label { font-size: 11px; color: #6b7280; margin-bottom: 4px; }
-.info-card .value { font-size: 14px; font-weight: bold; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; margin-bottom: 12px; }
+.info-card { border: 1px solid #ddd; border-radius: 6px; padding: 6px 8px; }
+.info-card .label { font-size: 9px; color: #6b7280; margin-bottom: 2px; }
+.info-card .value { font-size: 12px; font-weight: bold; }
 table { width: 100%; border-collapse: collapse; margin-top: 10px; }
 th, td { border: 1px solid #ddd; padding: 8px 10px; font-size: 12px; text-align: right; }
 th { background: #0f766e !important; color: #fff; font-weight: bold; text-align: center; }
@@ -620,9 +620,9 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
   <div class="logo">
     <img src="${logoUrl}" alt="لوگو" onerror="this.style.display='none'" />
     <div class="company-info">
-      <h1>بازرگانی مهر امین</h1>
+      <h1>هلدینگ مهر</h1>
       <p>سامانه مدیریت نمایندگی و انبار</p>
-      <p>تلفن: ۰۲۸-۳۳۲۳۶۰۷۲</p>
+      <p>تلفن: ۰۲۱-۹۳۱۱۱۰۲۱</p>
     </div>
   </div>
   <div style="font-size: 12px; text-align: left;">
@@ -708,7 +708,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 
   <div class="footer">
     <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
-    <p>بازرگانی مهر امین</p>
+    <p>هلدینگ مهر</p>
   </div>
 </div>
 

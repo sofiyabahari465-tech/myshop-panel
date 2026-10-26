@@ -81,7 +81,7 @@ const DEFAULT_PRINT_SETTINGS: PrintSettings = {
   reportDescription:
     'این گزارش بر اساس اطلاعات ثبت‌شده توسط نمایندگان در سامانه فروش و انبار تهیه شده است.',
   companyAddress: 'آدرس شرکت، شهر، استان',
-  companyPhone: '۰۲۸-۳۳۲۳۶۰۷۲',
+  companyPhone: '۰۲۱-۹۳۱۱۱۰۲۱',
   companyWebsite: 'www.example.com',
   reportNumber: '',
   preparedBy: '',
@@ -646,10 +646,10 @@ body { font-family: 'Vazirmatn', Tahoma, Arial, sans-serif; direction: rtl; padd
 .report-title { text-align: center; margin: 20px 0; }
 .report-title h2 { font-size: 22px; margin: 0; }
 .report-title p { font-size: 12px; color: #666; margin-top: 5px; }
-.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-.info-card { border: 1px solid #ddd; border-radius: 8px; padding: 12px 15px; }
-.info-card .label { font-size: 11px; color: #666; margin-bottom: 3px; }
-.info-card .value { font-size: 14px; font-weight: bold; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; margin-bottom: 12px; }
+.info-card { border: 1px solid #ddd; border-radius: 6px; padding: 6px 8px; }
+.info-card .label { font-size: 9px; color: #666; margin-bottom: 2px; }
+.info-card .value { font-size: 12px; font-weight: bold; }
 table { width: 100%; border-collapse: collapse; margin-top: 10px; }
 th, td { border: 1px solid #ddd; padding: 8px 10px; font-size: 12px; text-align: right; }
 th { background: #0f766e !important; color: #fff; font-weight: bold; }
@@ -668,9 +668,9 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
   <div class="logo">
     <img src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png" alt="لوگو" onerror="this.style.display='none'" />
     <div class="company-info">
-      <h1>بازرگانی مهر امین</h1>
+      <h1>هلدینگ مهر</h1>
       <p>سامانه مدیریت نمایندگی و انبار</p>
-      <p>تلفن: 028-33236072</p>
+      <p>تلفن: 021-93111021</p>
     </div>
   </div>
   <div style="font-size: 12px; text-align: left;">
@@ -744,7 +744,7 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
 
   <div class="footer">
     <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
-    <p>بازرگانی مهر امین - 1405</p>
+    <p>هلدینگ مهر - 1405</p>
   </div>
 </div>
 
@@ -863,9 +863,9 @@ tfoot td { background: #ecfdf5 !important; font-weight: bold; }
   <div class="logo">
     <img src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png" alt="لوگو" onerror="this.style.display='none'" />
     <div class="company-info">
-      <h1>بازرگانی مهر امین</h1>
+      <h1>هلدینگ مهر</h1>
       <p>سامانه مدیریت نمایندگی و انبار</p>
-      <p>تلفن: 028-33236072</p>
+      <p>تلفن: 021-93111021</p>
     </div>
   </div>
   <div style="font-size: 12px; text-align: left;">
@@ -898,7 +898,7 @@ ${rowsHtml}
 
 <div class="footer">
   <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
-  <p>بازرگانی مهر امین - 1405</p>
+  <p>هلدینگ مهر - 1405</p>
 </div>
 
 </body>

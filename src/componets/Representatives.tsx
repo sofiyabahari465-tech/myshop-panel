@@ -1032,9 +1032,9 @@ tr:nth-child(even) td { background: #f9fafb; }
   <div class="logo">
     <img src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png" alt="لوگو" onerror="this.style.display='none'" />
     <div class="company-info">
-      <h1>بازرگانی مهر امین</h1>
+      <h1>هلدینگ مهر</h1>
       <p>سامانه مدیریت نمایندگی و انبار</p>
-      <p>تلفن: 028-33236072</p>
+      <p>تلفن: 021-93111021</p>
     </div>
   </div>
   <div style="font-size: 12px; text-align: left;">
@@ -1083,7 +1083,7 @@ tr:nth-child(even) td { background: #f9fafb; }
 
 <div class="footer">
   <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
-  <p>بازرگانی مهر امین - 1405</p>
+  <p>هلدینگ مهر - 1405</p>
 </div>
 
 </body>
