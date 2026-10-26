@@ -385,8 +385,8 @@ const NotesPage: React.FC = () => {
 
 
           <div className="p-4 md:p-5">
-            <div className="relative">
-              <Search className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-blue-400" />
+            <div className="group relative">
+              <Search className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 transition-colors group-hover:text-blue-600 group-focus-within:text-blue-600 dark:text-gray-500 dark:group-hover:text-blue-400" />
 
               <input
                 type="text"
@@ -395,7 +395,7 @@ const NotesPage: React.FC = () => {
                 onChange={(event) => {
                   setSearchQuery(event.target.value);
                 }}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pr-10 pl-4 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                className="w-full rounded-xl border border-slate-300 bg-white py-3 pr-10 pl-4 text-sm text-slate-800 shadow-sm outline-none transition-all placeholder:text-slate-400 hover:border-blue-400 hover:shadow-md focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-400 dark:hover:border-blue-500 dark:focus:bg-gray-800 dark:focus:ring-blue-900/30"
               />
             </div>
           </div>
