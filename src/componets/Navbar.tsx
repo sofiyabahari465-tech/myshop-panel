@@ -55,7 +55,7 @@ const Navbar: React.FC<Props> = ({
       <div className="flex items-center justify-between gap-3 px-3 py-3 sm:px-4 md:px-6 md:py-4">
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <div
-            className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-2.5 text-sm font-black text-white shadow-md shadow-cyan-500/30 transition-transform hover:scale-105 sm:px-5 sm:text-base"
+            className="flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-2.5 py-1.5 text-[11px] font-bold text-white shadow-sm sm:px-3 sm:text-xs"
             title={
               isAdmin
                 ? 'دسترسی کامل ادمین'
@@ -63,25 +63,25 @@ const Navbar: React.FC<Props> = ({
             }
           >
             {isAdmin ? (
-              <Crown className="h-5 w-5" />
+              <Crown className="h-3.5 w-3.5" />
             ) : (
-              <User className="h-5 w-5" />
+              <User className="h-3.5 w-3.5" />
             )}
 
-            <span className="tracking-wide">{isAdmin ? 'ادمین' : 'نماینده'}</span>
+            <span className="tracking-tight">{isAdmin ? 'ادمین' : 'نماینده'}</span>
           </div>
 
-          <div className="flex shrink-0 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2 shadow-sm sm:px-4 dark:border-gray-700 dark:bg-gray-800">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 text-base font-black text-white shadow-sm">
+          <div className="flex shrink-0 items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-2 py-1.5 dark:border-gray-700 dark:bg-gray-800 sm:px-2.5">
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-to-br from-green-500 to-emerald-600 text-[11px] font-black text-white shadow-sm">
               {safeUserName.charAt(0)}
             </div>
 
             <div className="hidden lg:block">
-              <p className="text-base font-black tracking-wide text-gray-800 dark:text-white">
+              <p className="text-xs font-bold tracking-tight text-gray-800 dark:text-white">
                 {safeUserName}
               </p>
 
-              <p className="text-xs font-bold text-gray-500 dark:text-gray-400">
+              <p className="text-[10px] font-medium text-gray-500 dark:text-gray-400">
                 {isAdmin ? 'مدیر سیستم' : 'نماینده'}
               </p>
             </div>
