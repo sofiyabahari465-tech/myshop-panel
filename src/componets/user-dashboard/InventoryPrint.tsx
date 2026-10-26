@@ -1068,20 +1068,14 @@ const InventoryPrint = ({
         <header className="inventory-print-header">
           <div className="inventory-print-company">
             <div className="inventory-print-logo-box">
-              {(settings.companyLogoSrc || '../company-logo.png') ? (
-                <img
-                  src={settings.companyLogoSrc || '../company-logo.png'}
-                  alt="لوگوی شرکت"
-                  className="inventory-print-logo"
-                />
-              ) : (
-                <span className="inventory-print-logo-fallback">
-                  {textOr(
-                    representativeName,
-                    'ش',
-                  ).charAt(0)}
-                </span>
-              )}
+              <img
+                src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png"
+                alt="لوگوی هلدینگ مهر"
+                className="inventory-print-logo"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
             </div>
 
 
