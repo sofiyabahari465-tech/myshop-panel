@@ -536,60 +536,50 @@ const InventorySection = ({
       dir="rtl"
       className="inventory-section overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900"
     >
-      <div className="border-b border-slate-200 p-4 dark:border-slate-700 md:p-5">
-        <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
-          <div className="flex items-start gap-2">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-white shadow-sm dark:bg-slate-700">
-              <Warehouse className="h-6 w-6" />
-            </div>
-
-
+      <div className="border-b border-slate-200 p-3 dark:border-slate-700 md:p-4">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <img
+              src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png"
+              alt="هلدینگ مهر"
+              className="h-10 w-10 rounded-lg object-contain"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
             <div>
-              <h2 className="font-black text-slate-900 dark:text-white md:text-lg">
-                موجودی انبار نمایندگی
+              <h2 className="text-sm font-black text-slate-900 dark:text-white md:text-base">
+                هلدینگ مهر
               </h2>
-
-
-              <p className="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                جست‌وجو، فیلتر، تنظیم قالب و چاپ گزارش موجودی.
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                موجودی انبار نمایندگی
               </p>
             </div>
           </div>
 
-
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-            <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800">
-              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
-                تنوع کالا
+          <div className="flex items-center gap-1.5">
+            <div className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1 dark:border-slate-700 dark:bg-slate-800">
+              <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400">
+                تنوع
               </p>
-
-
-              <p className="mt-0.5 text-base font-black text-slate-900 dark:text-slate-100">
-                {toPersianNumber(totalProductTypes)} کالا
+              <p className="text-xs font-black text-slate-900 dark:text-slate-100">
+                {toPersianNumber(totalProductTypes)}
               </p>
             </div>
-
-
-            <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800">
-              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
-                تعداد کل اقلام
+            <div className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1 dark:border-slate-700 dark:bg-slate-800">
+              <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400">
+                اقلام
               </p>
-
-
-              <p className="mt-0.5 text-base font-black text-slate-900 dark:text-slate-100">
-                {toPersianNumber(totalQuantity)} قلم
+              <p className="text-xs font-black text-slate-900 dark:text-slate-100">
+                {toPersianNumber(totalQuantity)}
               </p>
             </div>
-
-
-            <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800">
-              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
+            <div className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1 dark:border-slate-700 dark:bg-slate-800">
+              <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400">
                 مجموع
               </p>
-
-
-              <p className="mt-0.5 text-base font-black text-slate-900 dark:text-slate-100">
-                {toPersianNumber(totalValue)} تومان
+              <p className="text-xs font-black text-slate-900 dark:text-slate-100">
+                {toPersianNumber(totalValue)}
               </p>
             </div>
           </div>
