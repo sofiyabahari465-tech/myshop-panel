@@ -134,6 +134,7 @@ const ADMIN_SECTIONS: Section[] = [
   'settings',
   'notes',
   'warranties',
+  'announcements',
 ];
 
 const REPRESENTATIVE_SECTIONS: Section[] = [
@@ -148,6 +149,7 @@ const REPRESENTATIVE_SECTIONS: Section[] = [
   'profile',
   'notes',
   'warranties',
+  'notifications',
 ];
 
 const getSavedSection = (): Section => {
