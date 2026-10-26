@@ -263,7 +263,7 @@ const DashboardCard: React.FC<
 }) => {
   return (
     <div
-      className="group relative min-h-[220px] overflow-hidden rounded-[24px] border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-blue-50/80 p-4 shadow-[0_8px_24px_rgba(15,23,42,0.09)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-[0_16px_32px_rgba(15,23,42,0.16)] dark:border-gray-700 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 dark:shadow-none sm:min-h-[250px] sm:p-5 md:rounded-[30px] md:p-6"
+      className="group relative min-h-[160px] overflow-hidden rounded-[20px] border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-blue-50/80 p-3 shadow-[0_6px_20px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-[0_14px_28px_rgba(15,23,42,0.14)] dark:border-gray-700 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 dark:shadow-none sm:min-h-[180px] sm:p-4 md:rounded-[24px] md:p-5"
       style={{
         animation: `cardEnter 550ms ease-out ${
           index * 70
@@ -271,18 +271,18 @@ const DashboardCard: React.FC<
       }}
     >
       <div className="relative z-10 flex h-full flex-col">
-        <div className="w-full rounded-xl border border-blue-100 bg-slate-800 px-4 py-2.5 text-center text-sm font-black text-white shadow-sm dark:border-slate-600 dark:bg-slate-700 sm:px-5 sm:py-3 sm:text-base md:text-lg">
+        <div className="w-full rounded-lg border border-blue-100 bg-slate-800 px-3 py-2 text-center text-xs font-black text-white shadow-sm dark:border-slate-600 dark:bg-slate-700 sm:px-4 sm:py-2.5 sm:text-sm md:text-base">
           {title}
         </div>
 
-        <div className="relative mt-5 flex flex-1 items-center justify-center overflow-hidden rounded-[18px] border border-slate-100 bg-white p-4 text-center shadow-[0_6px_18px_rgba(15,23,42,0.07)] dark:border-gray-700 dark:bg-gray-800 sm:mt-6 sm:p-5">
+        <div className="relative mt-3 flex flex-1 items-center justify-center overflow-hidden rounded-[14px] border border-slate-100 bg-white p-3 text-center shadow-[0_4px_14px_rgba(15,23,42,0.06)] dark:border-gray-700 dark:bg-gray-800 sm:mt-4 sm:p-4">
           <div className="relative z-20 w-full">
             {children}
           </div>
 
-          <div className="pointer-events-none absolute -right-8 -top-8 z-10 h-28 w-28 rounded-full border-[10px] border-blue-100/70 bg-blue-200/50 transition-transform duration-500 group-hover:scale-110 dark:border-blue-900/40 dark:bg-blue-800/30 sm:-right-9 sm:-top-9 sm:h-36 sm:w-36" />
+          <div className="pointer-events-none absolute -right-6 -top-6 z-10 h-20 w-20 rounded-full border-[8px] border-blue-100/70 bg-blue-200/50 transition-transform duration-500 group-hover:scale-110 dark:border-blue-900/40 dark:bg-blue-800/30 sm:-right-7 sm:-top-7 sm:h-28 sm:w-28" />
 
-          <div className="pointer-events-none absolute -bottom-10 -left-10 z-0 h-32 w-32 rounded-full bg-blue-100/50 blur-xl dark:bg-blue-900/20" />
+          <div className="pointer-events-none absolute -bottom-8 -left-8 z-0 h-24 w-24 rounded-full bg-blue-100/50 blur-xl dark:bg-blue-900/20" />
         </div>
       </div>
     </div>

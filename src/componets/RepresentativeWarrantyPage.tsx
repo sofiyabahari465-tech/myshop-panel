@@ -131,6 +131,16 @@ const RepresentativeWarrantyPage: React.FC = () => {
   const [submitSuccess, setSubmitSuccess] =
     useState<string | null>(null);
 
+  // ===== state های مودال «استفاده از گارانتی» =====
+  const [useWarrantyModalOpen, setUseWarrantyModalOpen] = useState(false);
+  const [useWarrantyIssue, setUseWarrantyIssue] = useState('');
+  const [useWarrantyImage, setUseWarrantyImage] = useState<File | null>(null);
+  const [useWarrantyImagePreview, setUseWarrantyImagePreview] = useState<string | null>(null);
+  const [useWarrantySubmitting, setUseWarrantySubmitting] = useState(false);
+  const [useWarrantyError, setUseWarrantyError] = useState<string | null>(null);
+  const [useWarrantySuccess, setUseWarrantySuccess] = useState<string | null>(null);
+  const useWarrantyImageInputRef = useRef<HTMLInputElement | null>(null);
+
   const [representative, setRepresentative] =
     useState<RepresentativeWarrantyInfo | null>(null);
 
@@ -321,6 +331,117 @@ const RepresentativeWarrantyPage: React.FC = () => {
       setSubmitError(e?.message || 'خطا');
     } finally {
       setSubmitting(false);
+    }
+  };
+
+
+  // ===== handlers مودال «استفاده از گارانتی» =====
+  const handleUseWarrantyImageChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    setUseWarrantyImage(file);
+    setUseWarrantyError(null);
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      setUseWarrantyImagePreview(
+        e.target?.result as string,
+      );
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const removeUseWarrantyImage = () => {
+    setUseWarrantyImage(null);
+    setUseWarrantyImagePreview(null);
+
+    if (useWarrantyImageInputRef.current) {
+      useWarrantyImageInputRef.current.value = '';
+    }
+  };
+
+  const openUseWarrantyModal = () => {
+    setUseWarrantyModalOpen(true);
+    setUseWarrantyIssue('');
+    setUseWarrantyImage(null);
+    setUseWarrantyImagePreview(null);
+    setUseWarrantyError(null);
+    setUseWarrantySuccess(null);
+  };
+
+  const closeUseWarrantyModal = () => {
+    if (useWarrantySubmitting) return;
+    setUseWarrantyModalOpen(false);
+    setUseWarrantyIssue('');
+    setUseWarrantyImage(null);
+    setUseWarrantyImagePreview(null);
+    setUseWarrantyError(null);
+    setUseWarrantySuccess(null);
+  };
+
+  const submitUseWarranty = async () => {
+    setUseWarrantyError(null);
+    setUseWarrantySuccess(null);
+
+    if (useWarrantyIssue.trim().length < 10) {
+      setUseWarrantyError('شرح مشکل باید حداقل ۱۰ کاراکتر باشد.');
+      return;
+    }
+
+    if (!useWarrantyImage) {
+      setUseWarrantyError('عکس محصول الزامی است.');
+      return;
+    }
+
+    setUseWarrantySubmitting(true);
+
+    try {
+      const token = getToken();
+
+      if (!token) {
+        throw new Error('توکن ورود پیدا نشد.');
+      }
+
+      const formData = new FormData();
+      formData.append('issueDescription', useWarrantyIssue.trim());
+      formData.append('image', useWarrantyImage, useWarrantyImage.name);
+      formData.append('useWarranty', 'true');
+
+      const response = await fetch(`${API_BASE_URL}/api/warranties/use`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!result.success) {
+        throw new Error(result.error || 'خطا در ثبت درخواست');
+      }
+
+      setUseWarrantySuccess('درخواست استفاده از گارانتی با موفقیت ثبت شد.');
+      setUseWarrantyIssue('');
+      removeUseWarrantyImage();
+
+      setTimeout(() => {
+        setUseWarrantyModalOpen(false);
+        setUseWarrantySuccess(null);
+      }, 2500);
+    } catch (e: any) {
+      setUseWarrantyError(e?.message || 'خطا');
+    } finally {
+      setUseWarrantySubmitting(false);
     }
   };
 
@@ -572,17 +693,34 @@ const RepresentativeWarrantyPage: React.FC = () => {
           ) : null}
 
           {submitSuccess ? (
-            <div className="mb-6 flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-800">
-              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+            <div className="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-800">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
 
-              <div>
-                <p className="font-black">
-                  درخواست گارانتی ثبت شد
+                <div className="flex-1">
+                  <p className="font-black">
+                    درخواست گارانتی ثبت شد
+                  </p>
+
+                  <p className="mt-1 text-sm font-medium leading-7">
+                    {submitSuccess}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 flex flex-col gap-3 border-t border-emerald-200 pt-4 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-xs font-bold text-emerald-700">
+                  برای ثبت درخواست استفاده از گارانتی روی دکمه زیر بزنید.
                 </p>
 
-                <p className="mt-1 text-sm font-medium leading-7">
-                  {submitSuccess}
-                </p>
+                <button
+                  type="button"
+                  onClick={openUseWarrantyModal}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-emerald-600 to-teal-500 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-emerald-500/25 transition-all hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0"
+                >
+                  <ShieldCheck className="h-4 w-4" />
+                  استفاده از گارانتی
+                </button>
               </div>
             </div>
           ) : null}
@@ -967,6 +1105,207 @@ const RepresentativeWarrantyPage: React.FC = () => {
       <div className="mt-6">
         <MyWarranties />
       </div>
+
+      {/* ===== مودال «استفاده از گارانتی» ===== */}
+      {useWarrantyModalOpen ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 p-4 backdrop-blur-sm"
+          onClick={closeUseWarrantyModal}
+        >
+          <div
+            className="max-h-[92vh] w-full max-w-lg overflow-hidden rounded-3xl border border-emerald-100 bg-white shadow-2xl"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            {/* هدر مودال */}
+            <div className="flex items-center justify-between border-b border-emerald-100 bg-gradient-to-l from-emerald-50 to-teal-50 p-5">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-white">
+                  <ShieldCheck className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="font-black text-slate-800">
+                    استفاده از گارانتی
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    شرح مشکل و عکس محصول را ثبت کنید
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={closeUseWarrantyModal}
+                disabled={useWarrantySubmitting}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-colors hover:bg-slate-200 disabled:opacity-50"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* بدنه مودال */}
+            <div className="max-h-[calc(92vh-180px)] overflow-y-auto p-5">
+              {useWarrantySuccess ? (
+                <div className="flex flex-col items-center justify-center py-10 text-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
+                    <CheckCircle2 className="h-9 w-9 text-emerald-600" />
+                  </div>
+                  <p className="mt-4 font-black text-emerald-700">
+                    {useWarrantySuccess}
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {useWarrantyError ? (
+                    <div className="mb-4 flex items-start gap-3 rounded-xl border border-rose-200 bg-rose-50 p-4 text-rose-700">
+                      <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+                      <p className="text-sm font-medium">
+                        {useWarrantyError}
+                      </p>
+                    </div>
+                  ) : null}
+
+                  {/* شرح مشکل */}
+                  <div className="mb-5">
+                    <label className="block">
+                      <span className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-700">
+                        <AlertCircle className="h-4 w-4 text-emerald-600" />
+                        شرح مشکل محصول
+                        <span className="text-rose-500">*</span>
+                      </span>
+
+                      <textarea
+                        rows={4}
+                        value={useWarrantyIssue}
+                        onChange={(event) => {
+                          setUseWarrantyIssue(event.target.value);
+                        }}
+                        placeholder="مشکل محصول را با جزئیات توضیح دهید؛ مثال: نشتی از محل اتصال، شکستگی بدنه، عملکرد نادرست..."
+                        className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium leading-7 text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+                      />
+                    </label>
+
+                    <p className="mt-2 text-xs font-medium text-slate-400">
+                      حداقل ۱۰ کاراکتر وارد کنید.
+                    </p>
+                  </div>
+
+                  {/* عکس محصول */}
+                  <div className="mb-2">
+                    <div className="mb-3 flex items-center gap-2">
+                      <Camera className="h-5 w-5 text-emerald-600" />
+
+                      <h4 className="font-black text-slate-800">
+                        عکس محصول (خرابی)
+                      </h4>
+
+                      <span className="text-sm font-bold text-rose-500">
+                        *
+                      </span>
+                    </div>
+
+                    <input
+                      ref={useWarrantyImageInputRef}
+                      type="file"
+                      accept="image/*"
+                      capture="environment"
+                      onChange={handleUseWarrantyImageChange}
+                      className="hidden"
+                    />
+
+                    {useWarrantyImagePreview ? (
+                      <div className="relative overflow-hidden rounded-2xl border border-emerald-200 bg-emerald-50 p-3">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                          <img
+                            src={useWarrantyImagePreview}
+                            alt="عکس محصول"
+                            className="h-32 w-full max-w-[180px] rounded-xl object-cover"
+                          />
+
+                          <div className="flex-1">
+                            <p className="text-sm font-black text-slate-700">
+                              عکس انتخاب شد
+                            </p>
+                            <p className="mt-1 text-xs text-slate-500">
+                              {useWarrantyImage?.name}
+                            </p>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={removeUseWarrantyImage}
+                            className="flex h-9 w-9 items-center justify-center rounded-full bg-rose-100 text-rose-600 transition hover:bg-rose-200"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          useWarrantyImageInputRef.current?.click();
+                        }}
+                        className="group flex min-h-40 w-full flex-col items-center justify-center rounded-2xl border-2 border-dashed border-emerald-300 bg-emerald-50/60 px-5 py-6 text-center transition-all hover:border-emerald-500 hover:bg-emerald-50"
+                      >
+                        <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-600 shadow-sm transition-transform group-hover:scale-110">
+                          <ImagePlus className="h-6 w-6" />
+                        </span>
+
+                        <span className="font-black text-emerald-800">
+                          گرفتن عکس یا انتخاب فایل
+                        </span>
+
+                        <span className="mt-2 max-w-md text-xs font-medium leading-6 text-slate-500">
+                          عکس واضح از محصول و خرابی آن را آپلود کنید. حداکثر حجم ۵ مگابایت.
+                        </span>
+                      </button>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* فوتر مودال */}
+            {useWarrantySuccess ? null : (
+              <div className="flex items-center justify-end gap-3 border-t border-slate-100 bg-slate-50 p-4">
+                <button
+                  type="button"
+                  onClick={closeUseWarrantyModal}
+                  disabled={useWarrantySubmitting}
+                  className="rounded-xl bg-slate-200 px-5 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-300 disabled:opacity-50"
+                >
+                  انصراف
+                </button>
+
+                <button
+                  type="button"
+                  onClick={submitUseWarranty}
+                  disabled={
+                    useWarrantySubmitting ||
+                    useWarrantyIssue.trim().length < 10 ||
+                    !useWarrantyImage
+                  }
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-emerald-600 to-teal-500 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-emerald-500/25 transition-all hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                >
+                  {useWarrantySubmitting ? (
+                    <>
+                      <LoaderCircle className="h-4 w-4 animate-spin" />
+                      در حال ثبت...
+                    </>
+                  ) : (
+                    <>
+                      <ShieldCheck className="h-4 w-4" />
+                      ثبت درخواست
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 };
