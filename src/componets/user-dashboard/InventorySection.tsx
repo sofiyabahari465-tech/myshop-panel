@@ -539,11 +539,14 @@ const InventorySection = ({
       <div className="border-b border-slate-200 p-4 dark:border-slate-700 md:p-5">
         <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
           <div className="flex items-start gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm dark:bg-slate-700">
-              <Warehouse className="h-6 w-6" />
-            </div>
-
-
+            <img
+              src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png"
+              alt="هلدینگ مهر"
+              className="h-12 w-12 shrink-0 rounded-lg object-contain"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
             <div>
               <h2 className="font-black text-slate-900 dark:text-white md:text-lg">
                 موجودی انبار نمایندگی
