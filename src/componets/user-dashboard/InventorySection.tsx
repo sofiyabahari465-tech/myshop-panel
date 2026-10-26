@@ -322,15 +322,28 @@ const InventorySection = ({
         );
 
 
+      const normalizedCategory = normalizeSearchText(category);
+      const normalizedSelectedCategory = normalizeSearchText(selectedCategory);
+      const normalizedBrand = normalizeSearchText(brand);
+      const normalizedSelectedBrand = normalizeSearchText(selectedBrand);
+
+      const categoryMatch = !selectedCategory ||
+        normalizedCategory === normalizedSelectedCategory ||
+        normalizedCategory.includes(normalizedSelectedCategory) ||
+        normalizedSelectedCategory.includes(normalizedCategory);
+
+      const brandMatch = !selectedBrand ||
+        normalizedBrand === normalizedSelectedBrand ||
+        normalizedBrand.includes(normalizedSelectedBrand) ||
+        normalizedSelectedBrand.includes(normalizedBrand);
+
       return (
         (!normalizedSearch ||
           searchableText.includes(
             normalizedSearch,
           )) &&
-        (!selectedBrand ||
-          brand === selectedBrand) &&
-        (!selectedCategory ||
-          category === selectedCategory)
+        brandMatch &&
+        categoryMatch
       );
     });
   }, [
