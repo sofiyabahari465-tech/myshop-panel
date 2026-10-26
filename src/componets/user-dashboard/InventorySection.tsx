@@ -536,10 +536,10 @@ const InventorySection = ({
       dir="rtl"
       className="inventory-section overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900"
     >
-      <div className="border-b border-slate-200 p-5 dark:border-slate-700 md:p-6">
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
-          <div className="flex items-start gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm dark:bg-slate-700">
+      <div className="border-b border-slate-200 p-4 dark:border-slate-700 md:p-5">
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+          <div className="flex items-start gap-2">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-white shadow-sm dark:bg-slate-700">
               <Warehouse className="h-6 w-6" />
             </div>
 
@@ -557,38 +557,38 @@ const InventorySection = ({
           </div>
 
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-800">
-              <p className="text-xs font-bold text-slate-500 dark:text-slate-400">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800">
+              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
                 تنوع کالا
               </p>
 
 
-              <p className="mt-1 text-lg font-black text-slate-900 dark:text-slate-100">
+              <p className="mt-0.5 text-base font-black text-slate-900 dark:text-slate-100">
                 {toPersianNumber(totalProductTypes)} کالا
               </p>
             </div>
 
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-800">
-              <p className="text-xs font-bold text-slate-500 dark:text-slate-400">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800">
+              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
                 تعداد کل اقلام
               </p>
 
 
-              <p className="mt-1 text-lg font-black text-slate-900 dark:text-slate-100">
+              <p className="mt-0.5 text-base font-black text-slate-900 dark:text-slate-100">
                 {toPersianNumber(totalQuantity)} قلم
               </p>
             </div>
 
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-800">
-              <p className="text-xs font-bold text-slate-500 dark:text-slate-400">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800">
+              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
                 مجموع
               </p>
 
 
-              <p className="mt-1 text-lg font-black text-slate-900 dark:text-slate-100">
+              <p className="mt-0.5 text-base font-black text-slate-900 dark:text-slate-100">
                 {toPersianNumber(totalValue)} تومان
               </p>
             </div>
@@ -613,8 +613,8 @@ const InventorySection = ({
         </div>
       ) : (
         <>
-          <div className="border-b border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/50 md:p-5">
-            <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+          <div className="border-b border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800/50 md:p-4">
+            <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
               <div className="relative min-w-0 flex-1">
                 <Search className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
 
@@ -631,7 +631,7 @@ const InventorySection = ({
               </div>
 
 
-              <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="flex flex-col gap-2 sm:flex-row">
                 <div className="relative">
                   <select
                     value={selectedBrand}
@@ -728,9 +728,9 @@ const InventorySection = ({
           </div>
 
 
-          <div className="p-5">
+          <div className="p-4">
             {filteredItems.length === 0 ? (
-              <div className="p-10 text-center">
+              <div className="p-8 text-center">
                 <Search className="mx-auto h-12 w-12 text-slate-300" />
 
 
@@ -764,10 +764,10 @@ const InventorySection = ({
                     return (
                       <article
                         key={item.id}
-                        className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-800"
+                        className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-800"
                       >
-                        <div className="flex items-start gap-3">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+                        <div className="flex items-start gap-2">
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
                             <Boxes className="h-5 w-5" />
                           </div>
 
@@ -785,8 +785,8 @@ const InventorySection = ({
                         </div>
 
 
-                        <div className="mt-4 grid grid-cols-2 gap-3">
-                          <div className="rounded-xl bg-indigo-50 p-3 text-center dark:bg-indigo-950/30">
+                        <div className="mt-3 grid grid-cols-2 gap-2">
+                          <div className="rounded-lg bg-indigo-50 p-2 text-center dark:bg-indigo-950/30">
                             <p className="text-xs font-bold text-indigo-700 dark:text-indigo-300">
                               برند
                             </p>
@@ -798,7 +798,7 @@ const InventorySection = ({
                           </div>
 
 
-                          <div className="rounded-xl bg-amber-50 p-3 text-center dark:bg-amber-950/30">
+                          <div className="rounded-lg bg-amber-50 p-2 text-center dark:bg-amber-950/30">
                             <p className="text-xs font-bold text-amber-700 dark:text-amber-300">
                               دسته‌بندی
                             </p>
@@ -811,8 +811,8 @@ const InventorySection = ({
                         </div>
 
 
-                        <div className="mt-3 grid grid-cols-3 gap-3">
-                          <div className="rounded-xl bg-emerald-50 p-3 text-center dark:bg-emerald-950/30">
+                        <div className="mt-3 grid grid-cols-3 gap-2">
+                          <div className="rounded-lg bg-emerald-50 p-2 text-center dark:bg-emerald-950/30">
                             <p className="text-xs font-bold text-emerald-700 dark:text-emerald-300">
                               تعداد
                             </p>
@@ -824,7 +824,7 @@ const InventorySection = ({
                           </div>
 
 
-                          <div className="rounded-xl bg-sky-50 p-3 text-center dark:bg-sky-950/30">
+                          <div className="rounded-lg bg-sky-50 p-2 text-center dark:bg-sky-950/30">
                             <p className="text-xs font-bold text-sky-700 dark:text-sky-300">
                               قیمت 
                             </p>
@@ -836,7 +836,7 @@ const InventorySection = ({
                           </div>
 
 
-                          <div className="rounded-xl bg-purple-50 p-3 text-center dark:bg-purple-950/30">
+                          <div className="rounded-lg bg-purple-50 p-2 text-center dark:bg-purple-950/30">
                             <p className="text-xs font-bold text-purple-700 dark:text-purple-300">
                                مجموع
                             </p>
@@ -857,33 +857,33 @@ const InventorySection = ({
                   <div className="overflow-x-auto">
                     <table className="w-full min-w-[760px] border-collapse text-center text-sm text-slate-700 dark:text-slate-200">
                       <thead className="border-b border-slate-200 bg-gradient-to-l from-slate-50 to-slate-100 text-xs text-slate-600 dark:border-slate-700 dark:from-slate-800 dark:to-slate-900 dark:text-slate-300">
-                        <tr className="h-14">
-                          <th className="whitespace-nowrap border-l border-slate-200 px-5 py-4 font-black last:border-l-0 dark:border-slate-700">
+                        <tr className="h-10">
+                          <th className="whitespace-nowrap border-l border-slate-200 px-3 py-2.5 font-black last:border-l-0 dark:border-slate-700">
                             عنوان 
                           </th>
 
 
-                          <th className="whitespace-nowrap border-l border-slate-200 px-5 py-4 font-black last:border-l-0 dark:border-slate-700">
+                          <th className="whitespace-nowrap border-l border-slate-200 px-3 py-2.5 font-black last:border-l-0 dark:border-slate-700">
                             برند
                           </th>
 
 
-                          <th className="whitespace-nowrap border-l border-slate-200 px-5 py-4 font-black last:border-l-0 dark:border-slate-700">
+                          <th className="whitespace-nowrap border-l border-slate-200 px-3 py-2.5 font-black last:border-l-0 dark:border-slate-700">
                             دسته‌بندی
                           </th>
 
 
-                          <th className="whitespace-nowrap border-l border-slate-200 px-5 py-4 font-black last:border-l-0 dark:border-slate-700">
+                          <th className="whitespace-nowrap border-l border-slate-200 px-3 py-2.5 font-black last:border-l-0 dark:border-slate-700">
                             تعداد 
                           </th>
 
 
-                          <th className="whitespace-nowrap border-l border-slate-200 px-5 py-4 font-black last:border-l-0 dark:border-slate-700">
+                          <th className="whitespace-nowrap border-l border-slate-200 px-3 py-2.5 font-black last:border-l-0 dark:border-slate-700">
                             قیمت 
                           </th>
 
 
-                          <th className="whitespace-nowrap px-5 py-4 font-black">
+                          <th className="whitespace-nowrap px-3 py-2.5 font-black">
                              مجموع 
                           </th>
                         </tr>
@@ -896,22 +896,22 @@ const InventorySection = ({
                             key={item.id}
                             className="h-16 bg-white transition-colors hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800/70"
                           >
-                            <td className="border-l border-slate-100 px-5 py-4 font-black text-slate-800 last:border-l-0 dark:border-slate-800 dark:text-slate-100">
+                            <td className="border-l border-slate-100 px-3 py-2.5 font-black text-slate-800 last:border-l-0 dark:border-slate-800 dark:text-slate-100">
                               {item.title || 'بدون عنوان'}
                             </td>
 
 
-                            <td className="border-l border-slate-100 px-5 py-4 text-slate-500 last:border-l-0 dark:border-slate-800 dark:text-slate-300">
+                            <td className="border-l border-slate-100 px-3 py-2.5 text-slate-500 last:border-l-0 dark:border-slate-800 dark:text-slate-300">
                               {getBrandLabel(item)}
                             </td>
 
 
-                            <td className="border-l border-slate-100 px-5 py-4 text-slate-500 last:border-l-0 dark:border-slate-800 dark:text-slate-300">
+                            <td className="border-l border-slate-100 px-3 py-2.5 text-slate-500 last:border-l-0 dark:border-slate-800 dark:text-slate-300">
                               {getCategoryLabel(item)}
                             </td>
 
 
-                            <td className="border-l border-slate-100 px-5 py-4 font-black text-emerald-700 last:border-l-0 dark:border-slate-800 dark:text-emerald-300">
+                            <td className="border-l border-slate-100 px-3 py-2.5 font-black text-emerald-700 last:border-l-0 dark:border-slate-800 dark:text-emerald-300">
                               {toPersianNumber(
                                 item.quantity,
                               )}{' '}
@@ -919,7 +919,7 @@ const InventorySection = ({
                             </td>
 
 
-                            <td className="border-l border-slate-100 px-5 py-4 font-semibold text-sky-700 last:border-l-0 dark:border-slate-800 dark:text-sky-300">
+                            <td className="border-l border-slate-100 px-3 py-2.5 font-semibold text-sky-700 last:border-l-0 dark:border-slate-800 dark:text-sky-300">
                               {toPersianNumber(
                                 item.unitPrice,
                               )}{' '}
@@ -927,7 +927,7 @@ const InventorySection = ({
                             </td>
 
 
-                            <td className="px-5 py-4 font-black text-violet-700 dark:text-violet-300">
+                            <td className="px-3 py-2.5 font-black text-violet-700 dark:text-violet-300">
                               {toPersianNumber(
                                 getItemTotal(item),
                               )}{' '}
@@ -942,7 +942,7 @@ const InventorySection = ({
                         <tr className="h-16">
                           <td
                             colSpan={3}
-                            className="border-l border-slate-200 px-5 py-4 font-black text-slate-800 last:border-l-0 dark:border-slate-700 dark:text-slate-100"
+                            className="border-l border-slate-200 px-3 py-2.5 font-black text-slate-800 last:border-l-0 dark:border-slate-700 dark:text-slate-100"
                           >
                             {hasActiveFilters
                               ? 'جمع نتایج فیلترشده'
@@ -950,7 +950,7 @@ const InventorySection = ({
                           </td>
 
 
-                          <td className="border-l border-slate-200 px-5 py-4 font-black text-emerald-700 last:border-l-0 dark:border-slate-700 dark:text-emerald-300">
+                          <td className="border-l border-slate-200 px-3 py-2.5 font-black text-emerald-700 last:border-l-0 dark:border-slate-700 dark:text-emerald-300">
                             {toPersianNumber(
                               filteredQuantity,
                             )}{' '}
@@ -958,12 +958,12 @@ const InventorySection = ({
                           </td>
 
 
-                          <td className="border-l border-slate-200 px-5 py-4 text-slate-400 last:border-l-0 dark:border-slate-700 dark:text-slate-500">
+                          <td className="border-l border-slate-200 px-3 py-2.5 text-slate-400 last:border-l-0 dark:border-slate-700 dark:text-slate-500">
                             —
                           </td>
 
 
-                          <td className="px-5 py-4 font-black text-violet-700 dark:text-violet-300">
+                          <td className="px-3 py-2.5 font-black text-violet-700 dark:text-violet-300">
                             {toPersianNumber(
                               filteredValue,
                             )}{' '}

@@ -1087,20 +1087,18 @@ const InventoryPrint = ({
 
 
             <div>
-              <h1>
-                {textOr(
-                  representativeName,
-                  settings.companyName,
-                )}
+              <h1 className="inventory-print-company-name">
+                هلدینگ مهر
               </h1>
-
-
 
               <p>
                 {textOr(
                   settings.companyTagline,
                   'سامانه مدیریت نمایندگی و انبار',
                 )}
+              </p>
+              <p className="inventory-print-company-phone">
+                تلفن: ۰۲۱-۹۳۱۱۱۰۲۱
               </p>
             </div>
           </div>
