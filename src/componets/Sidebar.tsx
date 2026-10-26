@@ -191,6 +191,12 @@ const Sidebar: React.FC<Props> = ({
       accent: 'amber',
     },
     {
+      id: 'notifications',
+      label: 'اطلاع‌رسانی',
+      icon: Bell,
+      accent: 'cyan',
+    },
+    {
       id: 'profile',
       label: 'پروفایل',
       icon: User,
