@@ -1,3 +1,9 @@
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import axios from 'axios';
 import {
   CalendarDays,
@@ -1178,6 +1184,196 @@ const ReturnRequestsSection = ({
   };
 
 
+  // ===== چاپ تک‌درخواست مرجوعی (با window.open) =====
+  const handlePrintSingleReturn = useCallback(
+    (request: any) => {
+      const printWindow = window.open(
+        '',
+        '_blank',
+        'width=900,height=700',
+      );
+      if (!printWindow) {
+        alert('لطفاً popup blocker را غیرفعال کنید');
+        return;
+      }
+
+      const today = new Intl.DateTimeFormat(
+        'fa-IR-u-ca-persian',
+        {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+        },
+      ).format(new Date());
+
+      const numberToFa = (value: unknown): string => {
+        const num = Number(
+          String(value ?? '')
+            .replace(/[۰-۹]/g, (d) =>
+              String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)),
+            )
+            .replace(/[٠-٩]/g, (d) =>
+              String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)),
+            )
+            .replace(/[,٬،\s]/g, '')
+            .replace(/[^\d.-]/g, ''),
+        );
+        return Number.isFinite(num)
+          ? num.toLocaleString('fa-IR')
+          : '۰';
+      };
+
+      const title = getReturnTitle(request);
+      const totalPrice = getReturnTotalPrice(request);
+      const quantity = getReturnQuantity(request);
+      const statusInfo = getReturnStatusInfo(request.status);
+      const items = Array.isArray(request.items) ? request.items : [];
+
+      const itemsHtml = items.length > 0
+        ? items.map((item: any, i: number) => `
+      <tr>
+        <td style="text-align:center;">${i + 1}</td>
+        <td>${item.title || item.productName || '—'}</td>
+        <td style="text-align:center;">${item.brand || '—'}</td>
+        <td style="text-align:center;">${numberToFa(item.quantity)}</td>
+        <td style="text-align:center;">${numberToFa(item.price)} تومان</td>
+        <td style="text-align:center;">${numberToFa(Number(item.quantity || 0) * Number(item.price || 0))} تومان</td>
+      </tr>
+    `).join('')
+        : `<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:20px;">اطلاعات کالا موجود نیست</td></tr>`;
+
+      printWindow.document.write(`<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>چاپ درخواست مرجوعی - ${title}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+body { font-family: 'Vazirmatn', Tahoma, Arial, sans-serif; direction: rtl; padding: 20px; background: #fff; color: #111; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 3px solid #0f766e; padding-bottom: 15px; }
+.logo { display: flex; align-items: center; gap: 15px; }
+.logo img { max-height: 60px; max-width: 200px; }
+.company-info h1 { font-size: 18px; margin: 0; color: #0f766e; }
+.company-info p { font-size: 12px; color: #555; margin: 2px 0; }
+.report-title { text-align: center; margin: 18px 0 12px; }
+.report-title h2 { font-size: 22px; margin: 0; color: #0f766e; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.info-card { border: 1px solid #ddd; border-radius: 8px; padding: 10px 15px; }
+.info-card .label { font-size: 11px; color: #6b7280; margin-bottom: 3px; }
+.info-card .value { font-size: 14px; font-weight: bold; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #ddd; padding: 6px 8px; font-size: 11px; text-align: right; }
+th { background: #0f766e !important; color: #fff; font-weight: bold; text-align: center; }
+tr:nth-child(even) td { background: #f9fafb; }
+.summary { display: flex; gap: 20px; margin-top: 20px; justify-content: space-around; }
+.summary-card { border: 1px solid #ddd; border-radius: 8px; padding: 12px 20px; text-align: center; min-width: 130px; background: #f9fafb; }
+.summary-card .label { font-size: 11px; color: #6b7280; }
+.summary-card .value { font-size: 18px; font-weight: bold; margin-top: 5px; color: #0f766e; }
+.status-badge { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: bold; }
+.status-pending { background: #fef3c7; color: #92400e; }
+.status-approved { background: #d1fae5; color: #065f46; }
+.status-rejected { background: #fee2e2; color: #991b1b; }
+.footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
+@media print { @page { size: A4 portrait; margin: 10mm; } body { padding: 0; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">
+    <img src="https://sofiyabahari465-tech.github.io/myshop-panel/company-logo.png" alt="لوگو" onerror="this.style.display='none'" />
+    <div class="company-info">
+      <h1>هلدینگ مهر</h1>
+      <p>سامانه مدیریت نمایندگی و انبار</p>
+      <p>تلفن: ۰۲۱-۹۳۱۱۱۰۲۱</p>
+    </div>
+  </div>
+  <div style="font-size: 12px; text-align: left;">
+    <p><strong>تاریخ چاپ:</strong> ${today}</p>
+  </div>
+</div>
+
+<div class="report-title">
+  <h2>گزارش درخواست مرجوعی</h2>
+</div>
+
+<div class="info-grid">
+  <div class="info-card">
+    <div class="label">نام کالا</div>
+    <div class="value">${title}</div>
+  </div>
+  <div class="info-card">
+    <div class="label">وضعیت</div>
+    <div class="value">
+      <span class="status-badge status-${statusInfo.type}">${statusInfo.label}</span>
+    </div>
+  </div>
+  <div class="info-card">
+    <div class="label">تاریخ ثبت</div>
+    <div class="value">${request.returnDate || formatDateTime(request.createdAt)}</div>
+  </div>
+  <div class="info-card">
+    <div class="label">شماره درخواست</div>
+    <div class="value">${request.id || '—'}</div>
+  </div>
+</div>
+
+${items.length > 0 ? `
+<table>
+  <thead>
+    <tr>
+      <th style="width: 5%;">ردیف</th>
+      <th style="width: 40%;">عنوان</th>
+      <th style="width: 15%;">برند</th>
+      <th style="width: 10%;">تعداد</th>
+      <th style="width: 15%;">قیمت</th>
+      <th style="width: 15%;">مجموع</th>
+    </tr>
+  </thead>
+  <tbody>
+    ${itemsHtml}
+  </tbody>
+</table>
+` : ''}
+
+<div class="summary">
+  <div class="summary-card">
+    <div class="label">تعداد</div>
+    <div class="value">${numberToFa(quantity)} قلم</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">مبلغ کل</div>
+    <div class="value">${numberToFa(totalPrice)}<br><span style="font-size:12px;">تومان</span></div>
+  </div>
+</div>
+
+${statusInfo.type === 'rejected' && request.adminNote ? `
+<div style="margin-top: 20px; border: 1px solid #fca5a5; border-radius: 8px; padding: 12px; background: #fef2f2;">
+  <p style="font-size: 12px; font-weight: bold; color: #991b1b;">دلیل رد:</p>
+  <p style="font-size: 12px; color: #7f1d1d; margin-top: 5px;">${request.adminNote}</p>
+</div>
+` : ''}
+
+<div class="footer">
+  <p>این گزارش به‌صورت خودکار از سامانه مدیریت نمایندگی و انبار تهیه شده است.</p>
+  <p>هلدینگ مهر</p>
+</div>
+
+</body>
+</html>`);
+      printWindow.document.close();
+      printWindow.focus();
+      setTimeout(() => {
+        printWindow.print();
+      }, 800);
+    },
+    [],
+  );
+
+
   return (
     <>
       <div
@@ -1823,6 +2019,15 @@ const ReturnRequestsSection = ({
                         {statusInfo.label}
                       </span>
                     )}
+
+                    <button
+                      type="button"
+                      onClick={() => handlePrintSingleReturn(request)}
+                      className="inline-flex w-fit items-center gap-1.5 rounded-lg border border-cyan-300 bg-cyan-50 px-3 py-1.5 text-xs font-black text-cyan-700 transition hover:bg-cyan-100 dark:border-cyan-900/50 dark:bg-cyan-950/30 dark:text-cyan-300"
+                    >
+                      <Printer className="h-4 w-4" />
+                      چاپ
+                    </button>
                   </article>
                 );
               })}
