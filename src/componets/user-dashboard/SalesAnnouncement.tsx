@@ -642,22 +642,22 @@ body { font-family: 'Vazirmatn', Tahoma, Arial, sans-serif; direction: rtl; padd
 .logo img { max-height: 60px; max-width: 200px; }
 .company-info h1 { font-size: 18px; margin: 0; color: #0f766e; }
 .company-info p { font-size: 12px; color: #555; margin: 2px 0; }
-.report-title { text-align: center; margin: 20px 0; }
-.report-title h2 { font-size: 22px; margin: 0; color: #0f766e; }
-.report-title p { font-size: 12px; color: #666; margin-top: 5px; }
-.report-card { margin-top: 30px; page-break-inside: avoid; }
-.report-card-header { background: #ecfdf5; padding: 10px; border-radius: 8px; margin-bottom: 10px; }
-.report-card-header h3 { margin: 0; font-size: 14px; color: #0f766e; }
-.report-card-header p { font-size: 11px; color: #666; margin: 3px 0 0; }
-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
-th, td { border: 1px solid #ddd; padding: 6px 8px; font-size: 11px; text-align: right; }
+.report-title { text-align: center; margin: 10px 0; }
+.report-title h2 { font-size: 18px; margin: 0; color: #0f766e; }
+.report-title p { font-size: 11px; color: #666; margin-top: 3px; }
+.report-card { margin-top: 10px; page-break-inside: avoid; }
+.report-card-header { background: #ecfdf5; padding: 5px 8px; border-radius: 6px; margin-bottom: 5px; }
+.report-card-header h3 { margin: 0; font-size: 12px; color: #0f766e; }
+.report-card-header p { font-size: 10px; color: #666; margin: 2px 0 0; }
+table { width: 100%; border-collapse: collapse; margin-top: 3px; }
+th, td { border: 1px solid #ddd; padding: 4px 6px; font-size: 10px; text-align: right; }
 th { background: #0f766e !important; color: #fff; font-weight: bold; text-align: center; }
 tr:nth-child(even) td { background: #f9fafb; }
-.summary { display: flex; gap: 20px; margin-top: 30px; justify-content: space-around; }
-.summary-card { border: 1px solid #ddd; border-radius: 8px; padding: 15px 25px; text-align: center; min-width: 150px; background: #f9fafb; }
-.summary-card .label { font-size: 11px; color: #6b7280; }
-.summary-card .value { font-size: 18px; font-weight: bold; margin-top: 5px; color: #0f766e; }
-.footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
+.summary { display: flex; gap: 10px; margin-top: 15px; justify-content: space-around; }
+.summary-card { border: 1px solid #ddd; border-radius: 6px; padding: 8px 15px; text-align: center; min-width: 120px; background: #f9fafb; }
+.summary-card .label { font-size: 10px; color: #6b7280; }
+.summary-card .value { font-size: 14px; font-weight: bold; margin-top: 3px; color: #0f766e; }
+.footer { margin-top: 20px; text-align: center; font-size: 10px; color: #999; border-top: 1px solid #eee; padding-top: 8px; }
 @media print { @page { size: A4 portrait; margin: 10mm; } body { padding: 0; } .report-card { page-break-inside: avoid; } }
 </style>
 </head>
