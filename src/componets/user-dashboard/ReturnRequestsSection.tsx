@@ -824,6 +824,14 @@ const ReturnRequestsSection = ({
 
 
   const addItemToReturnList = () => {
+    // فقط یک کالا می‌توان در هر درخواست مرجوعی ثبت کرد
+    if (returnItems.length >= 1) {
+      setLocalErrorMessage(
+        'در هر درخواست فقط یک کالا می‌توانید ثبت کنید. برای کالای دیگر، درخواست جدیدی ثبت کنید.',
+      );
+      return;
+    }
+
     const selectedItem =
       getSelectedWarehouseItem();
 
