@@ -658,7 +658,7 @@ tr:nth-child(even) td { background: #f9fafb; }
 .summary-card .label { font-size: 11px; color: #6b7280; }
 .summary-card .value { font-size: 18px; font-weight: bold; margin-top: 5px; color: #0f766e; }
 .footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
-@media print { @page { size: A4 portrait; margin: 10mm; } body { padding: 0; } .report-card { page-break-after: always; } .report-card:last-child { page-break-after: auto; } }
+@media print { @page { size: A4 portrait; margin: 10mm; } body { padding: 0; } .report-card { page-break-inside: avoid; } }
 </style>
 </head>
 <body>
