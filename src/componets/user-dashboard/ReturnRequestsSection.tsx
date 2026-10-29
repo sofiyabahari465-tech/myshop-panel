@@ -1227,17 +1227,22 @@ const ReturnRequestsSection = ({
       const items = Array.isArray(request.items) ? request.items : [];
 
       const itemsHtml = items.length > 0
-        ? items.map((item: any, i: number) => `
+        ? items.map((item: any, i: number) => {
+          const qty = Number(item.quantity || 0);
+          const unitPrice = Number(item.unitPrice || item.price || 0);
+          const rowTotal = qty * unitPrice;
+          return `
       <tr>
         <td style="text-align:center;">${i + 1}</td>
         <td>${item.title || item.productName || '—'}</td>
         <td style="text-align:center;">${item.brand || '—'}</td>
-        <td style="text-align:center;">${numberToFa(item.quantity)}</td>
-        <td style="text-align:center;">${numberToFa(item.price)} تومان</td>
-        <td style="text-align:center;">${numberToFa(Number(item.quantity || 0) * Number(item.price || 0))} تومان</td>
-      </tr>
-    `).join('')
-        : `<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:20px;">اطلاعات کالا موجود نیست</td></tr>`;
+        <td style="text-align:center;">${item.category || '—'}</td>
+        <td style="text-align:center;">${numberToFa(qty)}</td>
+        <td style="text-align:center;">${numberToFa(unitPrice)} تومان</td>
+        <td style="text-align:center;">${numberToFa(rowTotal)} تومان</td>
+      </tr>`;
+        }).join('')
+        : `<tr><td colspan="7" style="text-align:center;color:#9ca3af;padding:20px;">اطلاعات کالا موجود نیست</td></tr>`;
 
       printWindow.document.write(`<!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -1321,8 +1326,9 @@ ${items.length > 0 ? `
   <thead>
     <tr>
       <th style="width: 5%;">ردیف</th>
-      <th style="width: 40%;">عنوان</th>
-      <th style="width: 15%;">برند</th>
+      <th style="width: 30%;">عنوان</th>
+      <th style="width: 12%;">برند</th>
+      <th style="width: 13%;">دسته‌بندی</th>
       <th style="width: 10%;">تعداد</th>
       <th style="width: 15%;">قیمت</th>
       <th style="width: 15%;">مجموع</th>
