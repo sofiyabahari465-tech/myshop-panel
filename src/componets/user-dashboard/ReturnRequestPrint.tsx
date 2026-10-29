@@ -671,13 +671,15 @@ const ReturnRequestPrint = ({
         <table className="return-print-table">
           <thead>
             <tr>
-              <th style={{ width: '6%' }}>ردیف</th>
-              <th style={{ width: '26%' }}>عنوان مرجوعی</th>
-              <th style={{ width: '10%' }}>تعداد</th>
-              <th style={{ width: '16%' }}>مبلغ کل</th>
-              <th style={{ width: '16%' }}>تاریخ ثبت</th>
-              <th style={{ width: '12%' }}>وضعیت</th>
-              <th style={{ width: '14%' }}>توضیحات</th>
+              <th style={{ width: '5%' }}>ردیف</th>
+              <th style={{ width: '20%' }}>عنوان مرجوعی</th>
+              <th style={{ width: '10%' }}>برند</th>
+              <th style={{ width: '10%' }}>دسته‌بندی</th>
+              <th style={{ width: '8%' }}>تعداد</th>
+              <th style={{ width: '15%' }}>مبلغ کل</th>
+              <th style={{ width: '15%' }}>تاریخ ثبت</th>
+              <th style={{ width: '10%' }}>وضعیت</th>
+              <th style={{ width: '7%' }}>توضیحات</th>
             </tr>
           </thead>
 
@@ -685,12 +687,17 @@ const ReturnRequestPrint = ({
           <tbody>
             {safeRequests.length === 0 ? (
               <tr>
-                <td colSpan={7}>
+                <td colSpan={9}>
                   درخواست مرجوعی برای چاپ وجود ندارد.
                 </td>
               </tr>
             ) : (
-              safeRequests.map((request, index) => (
+              safeRequests.map((request, index) => {
+                const items = Array.isArray(request.items) ? request.items : [];
+                const firstItem = items[0] || {};
+                const brand = firstItem.brand || '—';
+                const category = firstItem.category || '—';
+                return (
                 <tr key={request.id || index}>
                   <td>
                     {formatNumber(index + 1)}
@@ -699,6 +706,8 @@ const ReturnRequestPrint = ({
 
                   <td>{getTitle(request)}</td>
 
+                  <td>{brand}</td>
+                  <td>{category}</td>
 
                   <td>
                     {formatNumber(getQuantity(request))}
@@ -725,7 +734,8 @@ const ReturnRequestPrint = ({
                     {request.adminNote || '—'}
                   </td>
                 </tr>
-              ))
+                );
+              })
             )}
           </tbody>
         </table>
